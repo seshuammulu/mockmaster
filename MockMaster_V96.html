@@ -1,0 +1,2509 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#6c4cff"><title>MockMaster V94</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f6ff;color:#20243a}.app{max-width:820px;margin:auto;min-height:100vh;background:#f4f6ff}
+header{background:linear-gradient(135deg,#6c4cff,#a45cff);color:#fff;padding:22px 18px 26px;border-radius:0 0 28px 28px}.brand{font-size:28px;font-weight:900}.tag{opacity:.92;margin-top:5px}
+.card{background:#fff;border-radius:20px;padding:18px;margin:14px;box-shadow:0 5px 20px #26306d12}h2{margin:4px 0 14px;font-size:20px}.muted{color:#70758c;font-size:13px;line-height:1.5}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.tile{border:0;border-radius:17px;padding:17px 10px;text-align:left;background:#f0edff;font-weight:800;color:#3e2c9b;min-height:84px}.tile span{display:block;font-size:25px;margin-bottom:7px}
+label{display:block;font-size:13px;font-weight:800;margin:12px 0 6px}select{width:100%;padding:13px;border:1px solid #ddd;border-radius:12px;background:#fff;font-size:15px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{width:100%;border:0;border-radius:14px;padding:15px;margin-top:14px;background:#6c4cff;color:#fff;font-size:16px;font-weight:900}.btn.alt{background:#eeeaff;color:#533ac8}.hidden{display:none!important}
+.step{display:flex;gap:6px;margin:10px 14px}.dot{height:7px;flex:1;border-radius:10px;background:#ddd}.dot.on{background:#6c4cff}.pill{display:inline-block;padding:6px 9px;border-radius:20px;background:#eeeaff;color:#533ac8;font-size:12px;margin:3px}.pattern{border-left:4px solid #6c4cff;padding:11px 12px;background:#f7f5ff;border-radius:10px;margin:12px 0;font-size:13px;line-height:1.55}.source{font-size:11px;color:#777;margin-top:7px}.status{padding:10px;border-radius:12px;background:#f5f3ff;color:#543ec1;margin-top:10px;font-size:13px}.question{font-size:18px;font-weight:800;line-height:1.45}.opt{padding:14px;border:1px solid #ddd;border-radius:13px;margin:9px 0;background:#fff}.opt.sel{border:2px solid #6c4cff;background:#f0edff}.topbar{display:flex;justify-content:space-between;align-items:center}.timer{font-weight:900;color:#d64242;background:#fff0f0;padding:9px 12px;border-radius:12px}.score{font-size:50px;font-weight:900;color:#6c4cff;text-align:center}.result{text-align:center}
+.badge{display:inline-block;background:#eaf8ef;color:#23733d;border-radius:20px;padding:5px 8px;font-size:11px;font-weight:800}.section{padding:10px 0;border-bottom:1px solid #eee}.section:last-child{border-bottom:0}.section b{display:block;margin-bottom:4px}.workflow{font-weight:800;color:#3f328f}.setup-note{font-size:12px;color:#777;margin-top:8px}
+nav{position:sticky;bottom:0;background:#fff;border-top:1px solid #eee;display:grid;grid-template-columns:repeat(4,1fr);padding:8px 4px;z-index:5}nav button{border:0;background:none;padding:8px;color:#777;font-weight:800}nav button.active{color:#6c4cff}
+@media(max-width:480px){.grid{grid-template-columns:1fr 1fr}.row{grid-template-columns:1fr}}
+
+.multi{position:relative}.multi-btn{width:100%;padding:13px 42px 13px 13px;border:1px solid #ddd;border-radius:12px;background:#fff;font-size:15px;text-align:left;min-height:48px;position:relative}.multi-btn:after{content:"⌄";position:absolute;right:15px;top:11px;font-size:20px;color:#555}.multi-btn.open{border:2px solid #6c4cff}.multi-menu{position:absolute;left:0;right:0;top:calc(100% + 6px);background:#fff;border:1px solid #ddd;border-radius:12px;box-shadow:0 8px 25px #26306d20;z-index:20;max-height:280px;overflow:auto;padding:6px}.multi-item{display:flex;align-items:center;gap:9px;padding:11px 9px;border-radius:9px;font-size:14px}.multi-item:hover{background:#f5f3ff}.multi-item input{width:18px;height:18px;accent-color:#6c4cff}.multi-hint{font-size:11px;color:#777;padding:7px 9px;border-bottom:1px solid #eee}
+
+.profile-hero{display:flex;align-items:center;gap:14px;padding:6px 0 18px}
+.profile-hero h2{margin:0 0 4px}
+.avatar{width:64px;height:64px;border-radius:50%;background:#eee9ff;display:flex;align-items:center;justify-content:center;font-size:31px;flex:none}
+.icon-btn{margin-left:auto;border:0;background:#eee9ff;border-radius:12px;padding:10px 12px;font-size:17px}
+.profile-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:#f5f2ff;border-radius:16px;padding:14px;margin-bottom:22px;text-align:center}
+.profile-stats strong{display:block;font-size:21px;color:#4d398f}.profile-stats span{display:block;font-size:12px;color:#777;margin-top:3px}
+.section-title{font-size:17px;margin:22px 0 10px}
+.info-row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #eee;font-size:14px}
+.info-row strong{font-weight:600;text-align:right}
+.setting-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid #eee}
+.setting-row small{display:block;color:#888;margin-top:3px}
+.setting-row select{border:1px solid #ddd;border-radius:10px;padding:9px;background:white;max-width:125px}
+.switch input{display:none}.switch span{display:block;width:46px;height:26px;border-radius:20px;background:#ddd;position:relative}.switch span:after{content:"";position:absolute;width:20px;height:20px;border-radius:50%;background:#fff;left:3px;top:3px;transition:.2s;box-shadow:0 1px 4px #0002}.switch input:checked+span{background:#6c4cff}.switch input:checked+span:after{left:23px}
+.profile-action{width:100%;padding:14px;border:1px solid #e3e0ee;background:#fff;border-radius:12px;text-align:left;margin-top:9px;font-size:14px}.profile-action.danger{color:#c33}
+
+.auth-hero{text-align:center;padding:12px 10px 20px}.auth-logo{width:78px;height:78px;margin:0 auto 14px;border-radius:24px;background:#eee9ff;display:flex;align-items:center;justify-content:center;font-size:38px}.auth-hero h2{margin:0 0 7px;font-size:24px}
+.auth-primary,.auth-secondary,.google-auth{width:100%;min-height:50px;border-radius:12px;font-size:15px;font-weight:700;margin-top:10px}.auth-primary{border:0;background:#6846f5;color:white}.auth-secondary{border:1px solid #6846f5;background:white;color:#5637d2}.google-auth{position:relative;border:1px solid #ddd;background:#fff;color:#222;box-shadow:0 2px 7px #00000010}.google-g{position:absolute;left:18px;font-size:21px;font-weight:800;font-family:Arial;color:#4285f4}.auth-divider{display:flex;align-items:center;gap:10px;margin:20px 0;color:#999;font-size:12px}.auth-divider:before,.auth-divider:after{content:"";height:1px;background:#e5e5e5;flex:1}.auth-signup-text{text-align:center;color:#777;font-size:13px;margin:18px 0 2px}.auth-note{margin-top:18px;padding:11px;background:#f7f6fb;border-radius:10px;color:#777;font-size:11px;text-align:center}
+.auth-modal{position:fixed;inset:0;background:#0006;z-index:100;display:flex;align-items:flex-end;justify-content:center}.auth-modal-card{background:#fff;width:100%;max-width:520px;border-radius:24px 24px 0 0;padding:25px 22px 30px;position:relative;box-shadow:0 -8px 30px #0003}.auth-close{position:absolute;right:18px;top:14px;border:0;background:#f1f1f1;border-radius:50%;width:34px;height:34px;font-size:24px;color:#666}.auth-modal-icon{text-align:center;font-size:30px}.auth-modal-card h2{text-align:center;margin:5px 0}.auth-modal-card>.muted{text-align:center;margin-bottom:20px}.auth-label{display:block;font-weight:600;font-size:13px;margin:12px 0 6px}.auth-input{width:100%;box-sizing:border-box;padding:14px;border:1px solid #ddd;border-radius:11px;font-size:15px;outline:none}.auth-input:focus{border:2px solid #6846f5}.auth-switch{text-align:center;font-size:13px;color:#777;margin:18px 0 0}.auth-switch button{border:0;background:none;color:#5a3cdd;font-weight:700;font-size:13px}
+
+.results-header{display:flex;align-items:center;justify-content:space-between;gap:10px}.results-header h2{margin-bottom:3px}.results-filter{border:1px solid #ddd;background:#fff;border-radius:10px;padding:9px 12px;color:#555}
+.result-overview{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:#f5f2ff;border-radius:16px;padding:14px;margin:18px 0}.result-overview strong{display:block;text-align:center;font-size:21px;color:#4d398f}.result-overview span{display:block;text-align:center;font-size:11px;color:#777;margin-top:3px}
+.result-item{border:1px solid #e6e3ef;border-radius:15px;padding:14px;margin-bottom:10px;background:#fff}.result-top{display:flex;justify-content:space-between;gap:10px}.result-name{font-weight:700;font-size:15px}.result-date{font-size:11px;color:#888;margin-top:4px}.result-score{font-size:20px;font-weight:800}.result-meta{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.result-chip{background:#f5f5f7;border-radius:8px;padding:5px 8px;font-size:11px;color:#666}.result-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:12px;padding-top:10px;border-top:1px solid #eee}.result-status{font-size:11px;font-weight:700}.result-actions button{border:0;background:#eee9ff;color:#5438c7;border-radius:8px;padding:7px 10px;font-size:11px}.results-empty{text-align:center;padding:35px 12px}.results-empty>div{font-size:42px}.results-empty h3{margin:8px 0 5px}
+
+.result-overview-4{grid-template-columns:repeat(4,1fr)}.result-secondary-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:-8px 0 18px}.result-secondary-stats>div{padding:11px 5px;text-align:center;border:1px solid #eee;border-radius:12px}.result-secondary-stats strong{display:block;font-size:18px}.result-secondary-stats span{font-size:10px;color:#777}
+.answer-modal{
+  position:fixed;inset:0;background:#0007;z-index:3000;
+  display:flex;align-items:center;justify-content:center;
+  overflow:auto;padding:18px 10px;box-sizing:border-box;
+}
+.answer-sheet{
+  background:#fff;max-width:650px;width:min(650px,100%);
+  max-height:90vh;overflow-y:auto;
+  margin:auto;border-radius:20px;padding:20px;position:relative;
+  box-sizing:border-box;
+}.answer-close{position:absolute;right:15px;top:12px;border:0;background:#f1f1f1;border-radius:50%;width:34px;height:34px;font-size:23px;color:#666}.answer-sheet h2{margin:0 35px 3px 0}.answer-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:18px 0 10px}.answer-summary>div{padding:10px 3px;text-align:center;border-radius:10px;background:#f7f6fb}.answer-summary b{display:block;font-size:19px}.answer-summary span{font-size:10px;color:#777}.answer-legend{display:flex;gap:14px;font-size:11px;margin:10px 0 14px}.legend-correct{color:#228b55}.legend-wrong{color:#d04444}.legend-left{color:#888}.answer-row{display:flex;gap:10px;border:1px solid #e8e6ed;border-left:4px solid #aaa;border-radius:12px;padding:12px;margin-bottom:9px}.answer-row.correct{border-left-color:#2a9b61}.answer-row.wrong{border-left-color:#d44b4b}.answer-row.left{border-left-color:#aaa}.answer-number{font-weight:800;min-width:24px}.answer-content{flex:1;min-width:0}.answer-content>strong{font-size:13px;line-height:1.4;display:block}.answer-options{display:flex;flex-direction:column;gap:4px;margin-top:8px}.answer-options span{font-size:11px;padding:5px 7px;border-radius:7px;background:#f7f7f7}.answer-options span.selected{font-weight:700}.answer-options span.correct-option{background:#eaf8f0}.answer-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px;font-size:10px;color:#777}.answer-status{font-size:10px;font-weight:800;white-space:nowrap}.answer-row.correct .answer-status{color:#228b55}.answer-row.wrong .answer-status{color:#d04444}.answer-row.left .answer-status{color:#888}
+
+.comparison-box{border:1px solid #ded8f4;background:#faf9ff;border-radius:16px;padding:15px;margin:0 0 15px}.comparison-title{font-weight:800;font-size:15px}.comparison-sub{font-size:11px;color:#777;margin-top:3px}.comparison-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}.comparison-cell{background:#fff;border-radius:11px;padding:10px;border:1px solid #eee}.comparison-cell span{display:block;font-size:10px;color:#777}.comparison-cell strong{display:block;font-size:18px;margin-top:3px}.improve{color:#218b58}.downward{color:#c64a4a}.same{color:#777}.comparison-note{margin-top:10px;padding:9px;border-radius:9px;background:#fff;font-size:11px;color:#666}
+
+.result-secondary-4{grid-template-columns:repeat(4,1fr)}.negative-box{margin:10px 0 14px;padding:10px;border-radius:10px;background:#fff7f7;color:#a33;font-size:12px}.negative-box strong{font-size:14px}
+</style>
+<style>.exam-search{width:100%;box-sizing:border-box;padding:13px 15px;border:1px solid #ddd;border-radius:12px;font-size:15px;margin:8px 0 12px}.category-tabs{display:flex;gap:7px;overflow-x:auto;padding:2px 0 12px}.category-tabs button{white-space:nowrap;border:1px solid #ddd;background:#fff;border-radius:20px;padding:8px 12px;font-size:12px}.category-tabs button.active{background:#6846f5;color:#fff;border-color:#6846f5}</style><style>
+.results-header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}.results-header h2{margin:0}.small-btn{border:1px solid #ddd;background:#fff;border-radius:10px;padding:8px 11px}.result-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0}.result-summary>div{background:#f5f2ff;border-radius:13px;padding:12px 6px;text-align:center}.result-summary strong{display:block;font-size:20px}.result-summary span{font-size:11px;color:#777}.result-secondary-4{grid-template-columns:repeat(4,1fr)}.results-empty{text-align:center;padding:30px 10px;color:#777}.results-empty h3{color:#333;margin:6px 0}.result-item{border:1px solid #e5e5e5;border-radius:14px;padding:13px;margin:10px 0}.result-top{display:flex;justify-content:space-between;gap:10px}.result-name{font-weight:800}.result-score{font-weight:900}.result-meta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.result-chip{font-size:11px;background:#f5f5f5;border-radius:10px;padding:5px 7px}.result-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:10px}.result-actions button{border:0;background:#eee9ff;border-radius:8px;padding:7px 9px}.result-date{font-size:11px;color:#888;margin-top:3px}
+@media(max-width:430px){.result-secondary-4{grid-template-columns:repeat(2,1fr)}}
+</style><style>
+html,body{min-height:100%;overflow-x:hidden}
+body{padding-bottom:72px}
+.app{min-height:100vh;display:flex;flex-direction:column}
+header{flex:none}
+.step{flex:none}
+main.screen{width:100%;flex:0 0 auto;margin:0;padding:0 0 10px}
+main.screen.hidden{display:none!important}
+nav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(820px,100%);box-shadow:0 -2px 12px #0000000d}
+#profile .card,#results .card{margin-top:14px}
+</style><style>
+/* FIXED BRAND HEADER: MockMaster title stays visible during every scroll */
+:root{--mock-header-height:181px}
+header{
+  position:fixed!important;
+  top:0!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+  z-index:1000!important;
+}
+.app{
+  padding-top:var(--mock-header-height)!important;
+}
+body{
+  padding-top:0!important;
+}
+</style><style>
+/* V24: header and bottom navigation stay fixed; each page scrolls only in the middle area */
+:root{
+  --mock-header-height:181px;
+  --mock-nav-height:74px;
+}
+html,body{height:100%;overflow:hidden}
+body{padding-bottom:0!important}
+.app{
+  height:100vh!important;
+  min-height:100vh!important;
+  padding-top:0!important;
+  overflow:hidden!important;
+}
+header{
+  position:fixed!important;
+  top:0!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  height:var(--mock-header-height)!important;
+  box-sizing:border-box!important;
+  z-index:1000!important;
+}
+main.screen{
+  position:absolute!important;
+  top:var(--mock-header-height)!important;
+  bottom:var(--mock-nav-height)!important;
+  left:0!important;
+  right:0!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0 0 14px!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  -webkit-overflow-scrolling:touch;
+}
+main.screen.hidden{display:none!important}
+nav{
+  position:fixed!important;
+  left:50%!important;
+  bottom:0!important;
+  transform:translateX(-50%)!important;
+  width:min(820px,100%)!important;
+  height:var(--mock-nav-height)!important;
+  box-sizing:border-box!important;
+  z-index:1001!important;
+}
+</style><style>
+/* V25: Explore controls stay visible; only the exam list scrolls */
+#explore{
+  overflow:hidden!important;
+}
+#explore>.card{
+  height:100%!important;
+  min-height:0!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:column!important;
+  overflow:hidden!important;
+}
+#explore>.card>h2,
+#explore>.card>.muted,
+#explore>.card>.exam-search,
+#explore>.card>.category-tabs{
+  flex:none!important;
+}
+#explore>.card>.exam-search{
+  position:relative!important;
+  z-index:5!important;
+}
+#explore>.card>.category-tabs{
+  position:relative!important;
+  z-index:5!important;
+  background:#fff!important;
+}
+#explore>#examTiles,
+#explore .card>#examTiles{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  -webkit-overflow-scrolling:touch!important;
+  padding-bottom:20px!important;
+  align-content:start!important;
+  grid-auto-rows:max-content!important;
+}
+</style><style>
+.news-box{
+  margin:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  overflow:hidden;
+}
+.header-news-box{
+  display:block;
+  margin-top:7px;
+  width:100%;
+}
+.news-window{
+  height:38px;
+  overflow:hidden;
+  position:relative;
+  display:flex;
+  align-items:center;
+  width:100%;
+}
+#homeExamNewsTicker{
+  display:flex;
+  align-items:center;
+  width:max-content;
+  min-width:max-content;
+  animation:mockmasterNewsScroll 55s linear infinite;
+  will-change:transform;
+}
+.exam-news-item{
+  flex:none;
+  height:38px;
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:0 44px 0 14px;
+  font-size:13px;
+  line-height:1.2;
+  font-weight:900;
+  white-space:nowrap;
+  text-decoration:none;
+}
+.exam-news-item .bullet{
+  font-size:17px;
+  flex:none;
+}
+.exam-news-item{color:#ffffff}
+.exam-news-item.contrast-news{color:#ffeb3b}
+.exam-news-item:hover{text-decoration:underline}
+@keyframes mockmasterNewsScroll{
+  0%{transform:translateX(100vw)}
+  100%{transform:translateX(-50%)}
+}
+@media (prefers-reduced-motion: reduce){
+  #homeExamNewsTicker{animation:none}
+}</style>
+<style>
+/* V68: tighter header — only a very small space below notifications */
+:root{
+  --mock-header-height:96px!important;
+}
+header{
+  height:var(--mock-header-height)!important;
+  min-height:0!important;
+  padding:5px 14px 0!important;
+  display:block!important;
+  text-align:center!important;
+  overflow:hidden!important;
+  border-radius:0 0 24px 24px!important;
+}
+header .brand{
+  display:block!important;
+  font-size:28px!important;
+  line-height:34px!important;
+  font-weight:900!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+}
+header .brand{
+  display:block!important;
+  width:100%!important;
+  margin:0 auto!important;
+  text-align:center!important;
+}
+header .tag{
+  display:block!important;
+  width:100%!important;
+  margin:1px auto 1px!important;
+  font-size:16px!important;
+  line-height:20px!important;
+  text-align:center!important;
+  white-space:nowrap!important;
+}
+.header-news-box{
+  display:block!important;
+  width:100%!important;
+  margin:0!important;
+}
+.header-news-box .news-window{
+  height:27px!important;
+  width:100%!important;
+}
+#homeExamNewsTicker{
+  animation-duration:180s!important;
+}
+main.screen{
+  top:var(--mock-header-height)!important;
+}
+</style>
+
+<style>
+/* V31: compact rectangular exam buttons */
+.home-grid,
+.explore-grid,
+.exam-grid,
+#examTiles{
+  gap:10px!important;
+}
+
+/* Common tile/card styles used by Home and Explore */
+.home-grid .tile,
+.explore-grid .tile,
+.exam-grid .tile,
+#examTiles .tile,
+.home-grid .exam-card,
+.explore-grid .exam-card,
+.exam-grid .exam-card,
+#examTiles .exam-card,
+.home-grid button,
+.explore-grid button,
+.exam-grid button,
+#examTiles button{
+  min-height:0!important;
+  height:auto!important;
+  padding:10px 14px!important;
+  border-radius:12px!important;
+  box-sizing:border-box!important;
+}
+
+/* Keep emoji/icon and exam name in one horizontal row */
+.home-grid .tile,
+.explore-grid .tile,
+.exam-grid .tile,
+#examTiles .tile,
+.home-grid .exam-card,
+.explore-grid .exam-card,
+.exam-grid .exam-card,
+#examTiles .exam-card{
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:10px!important;
+  text-align:left!important;
+}
+
+/* Make the icon compact */
+.home-grid .tile .icon,
+.explore-grid .tile .icon,
+.exam-grid .tile .icon,
+#examTiles .tile .icon,
+.home-grid .exam-card .icon,
+.explore-grid .exam-card .icon,
+.exam-grid .exam-card .icon,
+#examTiles .exam-card .icon{
+  font-size:24px!important;
+  line-height:1!important;
+  flex:0 0 auto!important;
+}
+
+/* Text stays beside the icon */
+.home-grid .tile h3,
+.home-grid .tile h4,
+.home-grid .tile .name,
+.explore-grid .tile h3,
+.explore-grid .tile h4,
+.explore-grid .tile .name,
+.exam-grid .tile h3,
+.exam-grid .tile h4,
+.exam-grid .tile .name,
+#examTiles .tile h3,
+#examTiles .tile h4,
+#examTiles .tile .name,
+.home-grid .exam-card h3,
+.home-grid .exam-card h4,
+.home-grid .exam-card .name,
+.explore-grid .exam-card h3,
+.explore-grid .exam-card h4,
+.explore-grid .exam-card .name,
+.exam-grid .exam-card h3,
+.exam-grid .exam-card h4,
+.exam-grid .exam-card .name,
+#examTiles .exam-card h3,
+#examTiles .exam-card h4,
+#examTiles .exam-card .name{
+  margin:0!important;
+  font-size:16px!important;
+  line-height:20px!important;
+  flex:1 1 auto!important;
+}
+
+/* Explore-generated cards: force horizontal layout for any direct child */
+#examTiles > *{
+  min-height:0!important;
+  padding:10px 14px!important;
+  border-radius:12px!important;
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  gap:10px!important;
+  text-align:left!important;
+}
+
+/* Prevent oversized nested emoji/title blocks */
+#examTiles > * > *{
+  margin-top:0!important;
+  margin-bottom:0!important;
+}
+</style>
+
+<style>
+/* V32: balanced icon + label, centered in thin rectangular buttons */
+#home .grid,
+#explore #examTiles{
+  gap:8px!important;
+}
+
+#home .grid .tile,
+#explore #examTiles .tile{
+  height:44px!important;
+  min-height:44px!important;
+  padding:5px 8px!important;
+  border-radius:10px!important;
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:center!important;
+  justify-content:center!important;
+  text-align:center!important;
+  gap:7px!important;
+  font-size:15px!important;
+  line-height:18px!important;
+  font-weight:800!important;
+  overflow:hidden!important;
+}
+
+#home .grid .tile span,
+#explore #examTiles .tile span{
+  display:inline-flex!important;
+  width:26px!important;
+  height:26px!important;
+  min-width:26px!important;
+  min-height:26px!important;
+  align-items:center!important;
+  justify-content:center!important;
+  margin:0!important;
+  font-size:22px!important;
+  line-height:26px!important;
+  flex:0 0 26px!important;
+}
+
+#home .grid .tile{
+  font-size:15px!important;
+}
+
+#explore #examTiles .tile{
+  font-size:15px!important;
+}
+
+/* Keep long exam names visually centered without oversized icons */
+#explore #examTiles .tile{
+  white-space:normal!important;
+}
+
+#explore #examTiles .tile span + *{
+  text-align:center!important;
+}
+
+/* Remove the old oversized tile minimum-height/padding rules */
+.home-grid .tile,
+.explore-grid .tile,
+.exam-grid .tile,
+#examTiles .tile{
+  min-height:44px!important;
+}
+</style>
+
+<style>
+/* V34: compact Explore header */
+#explore .card > h2{
+  margin-bottom:10px!important;
+}
+#explore #examSearch{
+  margin-top:0!important;
+}
+</style>
+
+<style>
+/* V35: Explore search becomes the page heading */
+#explore .card{
+  padding-top:14px!important;
+}
+#explore #examSearch{
+  display:block!important;
+  width:100%!important;
+  height:58px!important;
+  box-sizing:border-box!important;
+  margin:0 0 14px!important;
+  padding:0 18px!important;
+  border:2px solid #6c45e8!important;
+  border-radius:14px!important;
+  background:#fff!important;
+  color:#24283d!important;
+  font-size:20px!important;
+  font-weight:800!important;
+  outline:none!important;
+  box-shadow:none!important;
+}
+#explore #examSearch::placeholder{
+  color:#24283d!important;
+  opacity:1!important;
+  font-weight:800!important;
+}
+#explore #examSearch:focus{
+  border-color:#5b36d6!important;
+  box-shadow:0 0 0 3px rgba(108,69,232,.12)!important;
+}
+</style>
+
+<style>
+/* V38: small Sign Out button in header */
+header{position:relative!important;}
+#headerSignOut{
+  position:absolute!important;
+  top:10px!important;
+  right:12px!important;
+  z-index:5!important;
+  height:27px!important;
+  min-height:27px!important;
+  padding:0 10px!important;
+  margin:0!important;
+  border:1px solid rgba(255,255,255,.65)!important;
+  border-radius:14px!important;
+  background:rgba(255,255,255,.16)!important;
+  color:#fff!important;
+  font-size:11px!important;
+  line-height:25px!important;
+  font-weight:800!important;
+  box-shadow:none!important;
+}
+#headerSignOut:active{
+  background:rgba(255,255,255,.28)!important;
+  transform:scale(.98);
+}
+</style>
+
+<script>
+/* V38: show header Sign Out only while the demo profile is signed in */
+(function(){
+  window.updateHeaderSignOut=function(){
+    const b=document.getElementById("headerSignOut");
+    if(!b)return;
+    let signed=false;
+    try{
+      if(typeof profileData==="function"){
+        const p=profileData();
+        signed=!!(p && p.demoSignedIn);
+      }
+    }catch(e){}
+    b.style.display=signed ? "inline-flex" : "none";
+  };
+})();
+</script>
+
+<style>
+.community-panel{margin-top:12px;border:1px solid #e4dcff;border-radius:14px;background:#fbfaff;overflow:hidden}
+.community-head{padding:12px 14px;font-weight:900;color:#5533bd;display:flex;align-items:center;justify-content:space-between}
+.community-count{font-size:11px;padding:4px 8px;border-radius:10px;background:#eee9ff;color:#5533bd}
+.community-paper{padding:11px 14px;border-top:1px solid #eee9f8;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.community-paper-info{min-width:0;flex:1}.community-paper-title{font-weight:900;font-size:14px;color:#24283d}
+.community-paper-meta{margin-top:3px;font-size:11px;color:#777b8e}.community-paper-actions{display:flex;gap:6px}
+.community-btn{border:0;border-radius:9px;padding:7px 9px;font-size:11px;font-weight:800}.community-btn.attempt{background:#6c45e8;color:#fff}.community-btn.rank{background:#eee9ff;color:#5533bd}
+.community-empty{padding:14px;font-size:12px;color:#777b8e;text-align:center}.community-leaderboard{margin-top:10px;border-top:1px dashed #ddd6f5;padding:10px 14px 12px}
+.community-leaderboard h4{margin:0 0 8px;font-size:13px;color:#5533bd}.community-row{display:grid;grid-template-columns:34px 1fr 55px;gap:7px;align-items:center;font-size:11px;padding:5px 0}.community-row .ranknum{font-weight:900}.community-row .score{text-align:right;font-weight:900}
+.stamina-badge{display:inline-block;margin-left:5px;padding:2px 6px;border-radius:8px;background:#eef8f0;color:#2e7d32;font-size:10px;font-weight:900}
+</style>
+
+<style>
+/* V42: purple bottom navigation with white icons and labels */
+nav.bottom-nav,
+.bottom-nav,
+#bottomNav{
+  background:#6c45e8!important;
+  border-top:0!important;
+  box-shadow:0 -4px 16px rgba(72,45,160,.18)!important;
+}
+nav.bottom-nav button,
+.bottom-nav button,
+#bottomNav button{
+  color:#fff!important;
+  background:transparent!important;
+  border:0!important;
+  opacity:1!important;
+}
+nav.bottom-nav button.active,
+.bottom-nav button.active,
+#bottomNav button.active{
+  color:#fff!important;
+  background:rgba(255,255,255,.14)!important;
+}
+nav.bottom-nav button *,
+.bottom-nav button *,
+#bottomNav button *{
+  color:#fff!important;
+}
+</style>
+
+<style>
+/* V43: target the actual <nav> used by MockMaster */
+nav{
+  background:#6c45e8!important;
+  border-top:none!important;
+  box-shadow:0 -3px 14px rgba(60,35,150,.22)!important;
+}
+nav button{
+  color:#fff!important;
+  background:transparent!important;
+  border:none!important;
+  opacity:1!important;
+}
+nav button.active,
+nav button[aria-current="page"]{
+  color:#fff!important;
+  background:rgba(255,255,255,.16)!important;
+}
+nav button:focus,
+nav button:active{
+  color:#fff!important;
+}
+</style>
+
+<style>
+/* V44: attempted-exam selector + calendar-year history */
+.progress-card{margin-top:14px}
+.attempt-select-wrap{margin:8px 0 12px}
+.attempt-select-wrap label{display:block;font-size:12px;font-weight:800;color:#777b8e;margin-bottom:6px}
+#attemptExamSelect{
+  width:100%;height:48px;padding:0 12px;border:2px solid #6c45e8;border-radius:12px;
+  background:#fff;color:#24283d;font-size:14px;font-weight:800;outline:none;
+}
+.attempt-year-note{font-size:11px;color:#777b8e;margin:6px 0 10px}
+.attempt-list{display:flex;flex-direction:column;gap:8px}
+.attempt-item{
+  border:1px solid #e3def6;border-radius:12px;background:#fff;padding:10px 12px;
+  cursor:pointer;display:grid;grid-template-columns:34px 1fr auto;gap:8px;align-items:center;
+}
+.attempt-item:active{background:#f5f1ff}
+.attempt-num{font-weight:900;color:#6c45e8}
+.attempt-main{min-width:0}
+.attempt-title{font-size:13px;font-weight:900;color:#24283d}
+.attempt-meta{font-size:11px;color:#777b8e;margin-top:3px}
+.attempt-score{font-size:16px;font-weight:900;color:#5533bd;text-align:right}
+.attempt-more{margin-top:5px;text-align:center;font-size:11px;color:#6c45e8;font-weight:800}
+.attempt-empty{padding:12px;text-align:center;color:#777b8e;font-size:12px;background:#faf9ff;border-radius:10px}
+</style>
+
+<style>
+/* V45: five best attempts visible, additional attempts scroll below */
+.attempt-scroll-list{
+  max-height:310px;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+  padding-right:2px;
+}
+.attempt-scroll-list .attempt-item{
+  margin-bottom:8px;
+}
+.attempt-scroll-list .attempt-item:last-child{margin-bottom:0}
+.best-attempt{background:#fbfaff}
+</style>
+
+<style>
+/* V46: attempt history follows the exam authority's schedule/session */
+.attempt-year-note{color:#6c45e8;font-weight:800}
+</style>
+
+<style>
+</style>
+<style>
+</style>
+<style id="v50-answer-summary-colours">
+/* V50: use the existing Correct/Wrong/Left colours on the summary boxes */
+.answer-summary .summary-box.correct,
+.answer-sheet .summary-box.correct {background:#e9f8ef !important;border:1px solid #b9e8c8 !important;color:#21844b !important;}
+.answer-summary .summary-box.wrong,
+.answer-sheet .summary-box.wrong {background:#fff0f0 !important;border:1px solid #f0c2c2 !important;color:#c44b4b !important;}
+.answer-summary .summary-box.left,
+.answer-sheet .summary-box.left {background:#f0f0f0 !important;border:1px solid #d2d2d2 !important;color:#666 !important;}
+.answer-summary .summary-box.attempted,
+.answer-sheet .summary-box.attempted {background:#f4f1ff !important;border:1px solid #ddd5ff !important;color:#25283d !important;}
+.answer-summary .summary-box.correct .summary-label,
+.answer-summary .summary-box.wrong .summary-label,
+.answer-summary .summary-box.left .summary-label,
+.answer-summary .summary-box.attempted .summary-label,
+.answer-sheet .summary-box.correct .summary-label,
+.answer-sheet .summary-box.wrong .summary-label,
+.answer-sheet .summary-box.left .summary-label,
+.answer-sheet .summary-box.attempted .summary-label {color:inherit !important;}
+</style>
+
+<style id="v53-answer-summary-colours">
+.answer-summary>div.attempted{background:#f4f1ff!important;border:1px solid #ddd5ff!important;color:#25283d!important}
+.answer-summary>div.correct{background:#e9f8ef!important;border:1px solid #b9e8c8!important;color:#21844b!important}
+.answer-summary>div.wrong{background:#fff0f0!important;border:1px solid #f0c2c2!important;color:#c44b4b!important}
+.answer-summary>div.left{background:#f0f0f0!important;border:1px solid #d2d2d2!important;color:#666!important}
+.answer-summary>div span{color:inherit!important}
+</style>
+
+
+<style id="v55-doubt-clarification">
+/* V55: labels sit centered directly on each box's top border to save vertical space */
+.doubt-card{padding:14px 16px 20px}
+.doubt-box{position:relative;width:100%;border-radius:15px;box-sizing:border-box;padding:18px 12px 10px}
+.doubt-question-box{height:175px;border:1.5px solid #7652e8;background:#f8f6ff}
+.doubt-answer-box{height:330px;max-height:44vh;margin-top:18px;border:1.5px solid #7b8fe8;background:#f3f7ff}
+.doubt-box-label{position:absolute;left:50%;top:0;transform:translate(-50%,-50%);z-index:2;padding:0 10px;background:#fff;color:#20243a;font-size:20px;font-weight:900;line-height:1.15;white-space:nowrap}
+.doubt-box-label.answer{color:#5d3ed0;font-size:23px}
+.doubt-question{display:block;width:100%;height:100%;min-height:0;max-height:none;resize:vertical;overflow-y:auto;border:0;border-radius:10px;background:transparent;color:#20243a;padding:8px 2px;font:16px/1.5 Arial,sans-serif;outline:none;box-sizing:border-box}
+.doubt-question:focus{outline:none}
+.doubt-question::placeholder{color:#8b8fa3}
+.doubt-answer{width:100%;height:100%;max-height:none;overflow-y:auto;white-space:pre-wrap;border:0;border-radius:10px;background:transparent;color:#20243a;padding:8px 2px;font:15px/1.6 Arial,sans-serif;scrollbar-width:thin;box-sizing:border-box}
+.doubt-answer:empty{display:block}
+.doubt-actions{display:grid;grid-template-columns:1fr 100px;gap:9px}
+.doubt-actions .btn{margin-top:10px}
+.doubt-status{min-height:18px;margin-top:8px;color:#6f7488;font-size:11px}
+.doubt-sources{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.doubt-source{font-size:10px;color:#5a3cdd;background:#eee9ff;border-radius:10px;padding:5px 8px;text-decoration:none}
+.doubt-source:hover{text-decoration:underline}
+@media(max-width:480px){
+  .doubt-card{padding:14px 14px 18px}
+  .doubt-question-box{height:155px}
+  .doubt-answer-box{height:300px;max-height:42vh}
+  .doubt-box-label{font-size:19px;padding:0 8px}
+  .doubt-box-label.answer{font-size:21px}
+  .doubt-actions{grid-template-columns:1fr 88px}
+}
+</style>
+
+
+<style id="v60-doubt-box-actions">
+/* V60: action buttons are anchored to the BOTTOM-RIGHT corner of each box.
+   Labels stay centered on the top border. */
+.doubt-box-label{
+  left:50%;
+  top:0;
+  transform:translate(-50%,-50%);
+  display:block;
+  width:max-content;
+  max-width:calc(100% - 24px);
+  text-align:center;
+  padding:0 10px;
+  white-space:nowrap;
+}
+.doubt-label-action{
+  position:absolute;
+  right:-1px;
+  bottom:-1px;
+  top:auto;
+  transform:none;
+  z-index:5;
+  border:0;
+  border-radius:8px;
+  min-height:0;
+  height:auto;
+  width:max-content;
+  padding:5px 8px;
+  font:800 11px/1.15 Arial,sans-serif;
+  white-space:nowrap;
+  cursor:pointer;
+  box-shadow:0 2px 6px #26306d24;
+  background:#6846f5;
+  color:#fff;
+}
+.doubt-label-action:active{transform:scale(.98)}
+@media(max-width:480px){
+  .doubt-label-action{
+    right:-1px;
+    bottom:-1px;
+    padding:5px 8px;
+    font-size:11px;
+  }
+}
+</style>
+
+<!-- MockMaster V96: Firebase AI Logic diagnostics + production App Check -->
+<script type="module">
+  // MockMaster V96 uses the current Firebase Web AI Logic pattern.
+  // Firebase JS SDK 12.19.0 is the current documented JS release.
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+  import { initializeAppCheck, ReCaptchaEnterpriseProvider, getToken } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app-check.js";
+  import { getFirestore, collection, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+  import { getAI, getGenerativeModel, GoogleAIBackend } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-ai.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyA52VwRQuxs9OTshlHlTC_eJ9PRwkvx2w",
+    authDomain: "mockmaster-2026.firebaseapp.com",
+    projectId: "mockmaster-2026",
+    storageBucket: "mockmaster-2026.firebasestorage.app",
+    messagingSenderId: "641680735458",
+    appId: "1:641680735458:web:61ffe7ae77e58bbcef72bb"
+  };
+
+  const RECAPTCHA_ENTERPRISE_SITE_KEY = "6LecTMctAAAAALkRLJp0Uwjz-V2WHKULZiwUx2A9";
+
+  const maskKey = key => {
+    const v = String(key || "");
+    if (v.length < 12) return v ? "configured" : "missing";
+    return v.slice(0, 6) + "…" + v.slice(-6);
+  };
+
+  try {
+    const app = initializeApp(firebaseConfig);
+
+    // Production App Check must be initialized before services that use it.
+    const appCheck = initializeAppCheck(app, {
+      provider: new ReCaptchaEnterpriseProvider(RECAPTCHA_ENTERPRISE_SITE_KEY),
+      isTokenAutoRefreshEnabled: true
+    });
+
+    const db = getFirestore(app);
+
+    // Firebase AI Logic uses the Firebase app configuration and Firebase's
+    // AI Logic proxy. No Gemini API key is embedded in MockMaster.
+    const ai = getAI(app, { backend: new GoogleAIBackend() });
+    const doubtModel = getGenerativeModel(ai, {
+      model: "gemini-3.8-flash",
+      tools: [{ googleSearch: {} }]
+    });
+
+    // Expose safe diagnostic helpers to the normal (non-module) app scripts.
+    // The App Check token itself is NEVER exposed to the page UI.
+    window.MockMasterGetAppCheckToken = async function(forceRefresh = false) {
+      const result = await getToken(appCheck, forceRefresh);
+      return result?.token || "";
+    };
+
+    window.MockMasterAI = { ai, doubtModel, appCheck };
+    window.MockMasterAppCheckInstance = appCheck;
+    window.MockMasterFirebaseDiagnostics = {
+      sdkVersion: "12.19.0",
+      projectId: app.options.projectId || "",
+      appId: app.options.appId || "",
+      authDomain: app.options.authDomain || "",
+      apiKeyMasked: maskKey(app.options.apiKey),
+      location: window.location.href,
+      origin: window.location.origin,
+      protocol: window.location.protocol,
+      aiBackend: "GoogleAIBackend / Gemini Developer API",
+      model: "gemini-3.8-flash",
+      appCheckProvider: "reCAPTCHA Enterprise",
+      appCheckSiteKeyConfigured: !!RECAPTCHA_ENTERPRISE_SITE_KEY
+    };
+    window.MockMasterAppCheck = {
+      production: true,
+      provider: "reCAPTCHA Enterprise",
+      siteKeyConfigured: true,
+      registered: true
+    };
+
+    window.dispatchEvent(new CustomEvent("mockmaster-appcheck-ready"));
+
+    window.MockMasterFirebase = {
+      app,
+      db,
+      appCheck,
+      ready: Promise.resolve(true),
+      listenNotifications(callback) {
+        const q = query(
+          collection(db, "notifications"),
+          orderBy("publishedAt", "desc"),
+          limit(50)
+        );
+        return onSnapshot(q, snap => {
+          callback(snap.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        }, err => {
+          console.warn("MockMaster Firestore notification listener:", err);
+          callback([]);
+        });
+      }
+    };
+  } catch (e) {
+    console.error("MockMaster Firebase initialization failed:", e);
+    window.MockMasterFirebase = { ready: Promise.resolve(false) };
+    window.MockMasterAI = null;
+    window.MockMasterFirebaseDiagnostics = {
+      sdkVersion: "12.19.0",
+      projectId: firebaseConfig.projectId,
+      appId: firebaseConfig.appId,
+      authDomain: firebaseConfig.authDomain,
+      apiKeyMasked: maskKey(firebaseConfig.apiKey),
+      location: window.location.href,
+      origin: window.location.origin,
+      protocol: window.location.protocol,
+      initError: String(e?.message || e)
+    };
+    window.MockMasterAppCheck = {
+      production: true,
+      provider: "reCAPTCHA Enterprise",
+      siteKeyConfigured: true,
+      registered: false,
+      error: String(e && e.message ? e.message : e)
+    };
+  }
+</script>
+
+<style id="v96-diagnostic">
+.doubt-diagnostic{margin-top:10px;padding:10px 12px;border:1px solid #e2dff0;border-radius:10px;background:#faf9fe;color:#45445a;font-size:12px;line-height:1.45;white-space:pre-wrap;word-break:break-word}
+.doubt-diagnostic b{color:#24233a}
+</style>
+<style id="v85-inline-profile-edit">
+.profile-inline-row{display:grid;grid-template-columns:minmax(125px,1fr) minmax(180px,1.4fr);align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #eceaf2}
+.profile-inline-row label{font-size:15px;color:#24283d;font-weight:600}
+.profile-inline-input{width:100%;box-sizing:border-box;padding:10px 12px;border:1.5px solid #d8d4e6;border-radius:10px;background:#fff;color:#24283d;font-size:14px;outline:none}
+.profile-inline-input:focus{border-color:#6b46e5;box-shadow:0 0 0 2px rgba(107,70,229,.10)}
+.profile-inline-row strong{font-size:14px;color:#24283d;text-align:right;word-break:break-word}
+@media(max-width:520px){.profile-inline-row{grid-template-columns:1fr;gap:6px}.profile-inline-row strong{text-align:left}}
+</style>
+<style id="v82-profile-editor-fix">
+/* V82: Profile editor is a full-height, touch-scrollable modal above the fixed header/nav. */
+.profile-edit-hint{font-size:11px;color:#777b8e;margin:-5px 0 8px;font-weight:700}
+.info-row.editable{cursor:pointer;position:relative;padding-right:34px}
+.info-row.editable:active{background:#f7f3ff}
+.info-row .edit-mark{position:absolute;right:8px;font-size:13px;opacity:.7}
+#profileEditModal{z-index:4000!important;align-items:flex-start!important;justify-content:center!important;overflow:hidden!important;padding:12px 0!important}
+#profileEditModal .profile-editor-card{width:min(520px,100%);height:calc(100vh - 24px);max-height:none;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-y;padding:25px 22px calc(34px + env(safe-area-inset-bottom));border-radius:24px;overscroll-behavior:contain}
+#profileEditModal .auth-primary{margin-bottom:4px}
+.profile-select{appearance:auto!important;-webkit-appearance:auto!important;background:#fff!important;color:#24283d!important}
+.optional-label{font-weight:500;color:#8b8f9f}
+</style>
+
+<style id="v86-doubt-subject">
+.doubt-subject-row{display:flex;align-items:center;gap:10px;margin:0 0 10px}
+.doubt-subject-row label{font-size:13px;font-weight:700;color:#4b4f63;white-space:nowrap}
+.doubt-subject{flex:1;min-width:0;padding:9px 12px;border:1px solid #d8d4e6;border-radius:10px;background:#fff;color:#24283d;font-size:14px;outline:none}
+.doubt-subject:focus{border-color:#6b46e5;box-shadow:0 0 0 2px rgba(107,70,229,.10)}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<div class="brand">🎓 MockMaster</div>
+<div class="tag">Knowledge is divine</div>
+<button id="headerSignOut" type="button" class="header-signout" onclick="signOutDemo()">Sign Out</button>
+<div id="homeNewsBar" class="news-box header-news-box">
+  <div class="news-window"><div id="homeExamNewsTicker"></div></div>
+</div>
+</header>
+<div id="steps" class="step"></div>
+
+<main id="home" class="screen"><div class="card"><h2>What do you want to practice?</h2><div class="grid">
+<button class="tile" onclick="openExam('State Board')"><span>🏫</span>State Board</button><button class="tile" onclick="openExam('CBSE')"><span>📘</span>CBSE</button><button class="tile" onclick="openExam('ICSE')"><span>📗</span>ICSE</button><button class="tile" onclick="show('explore')"><span>🎯</span>Competitive Exams</button>
+</div></div>
+<div class="card doubt-card">
+  <div class="doubt-box doubt-question-box">
+    <div class="doubt-box-label">❓ Doubt Clarification</div>
+    <div class="doubt-subject-row">
+      <label for="doubtSubject">Subject</label>
+      <select id="doubtSubject" class="doubt-subject" aria-label="Subject">
+        <option value="">Select subject</option>
+        <option>Mathematics</option>
+        <option>Science</option>
+        <option>Physics</option>
+        <option>Chemistry</option>
+        <option>Biology</option>
+        <option>English</option>
+        <option>Hindi</option>
+        <option>Social Science</option>
+        <option>History</option>
+        <option>Geography</option>
+        <option>Political Science</option>
+        <option>Economics</option>
+        <option>Computer Science</option>
+        <option>General Knowledge</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <textarea id="doubtQuestion" class="doubt-question" placeholder="Ask your subject-related question..." aria-label="Doubt Clarification"></textarea>
+    <button class="doubt-label-action ask" id="doubtAskBtn" type="button" onclick="askDoubt()">🔎 Get Answer</button>
+  </div>
+  <div class="doubt-box doubt-answer-box">
+    <div class="doubt-box-label answer">Answer to the doubt</div>
+    <div id="doubtAnswer" class="doubt-answer" aria-live="polite">Ask your doubt above. The answer will appear here.</div>
+    <button class="doubt-label-action clear" type="button" onclick="clearDoubt()">Clear</button>
+  </div>
+  <div id="doubtStatus" class="doubt-status"></div>
+  <div id="doubtDiagnostic" class="doubt-diagnostic hidden"></div>
+  <div id="doubtSources" class="doubt-sources"></div>
+</div></main>
+
+<main id="explore" class="screen hidden"><div class="card">
+<input id="examSearch" class="exam-search" placeholder="🔎 Explore Exams" oninput="renderExplore()"><div class="category-tabs" id="categoryTabs"></div><div class="grid" id="examTiles"></div></div></main>
+
+<main id="setup" class="screen hidden"><div class="card"><h2 id="setupTitle">⚙️ Create Mock</h2><div id="workflowInfo" class="status"></div><div id="fields"></div><div id="patternBox" class="pattern"></div><p class="muted" style="margin-top:12px">Selections are dependent: changing Paper/Tier/Stage/Type updates the valid Subject/Section choices. For CUET, use the Test Paper Type first, then select up to 5 valid test papers from the dropdown; Question Language remains the language used to display the questions.</p><button class="btn" onclick="generate()">✨ Generate Mock Test</button></div>
+<div id="communityPapers" class="community-panel">
+<div class="community-head"><span>🏆 User Generated Papers</span><span id="communityPaperCount" class="community-count">0 papers • 0 completed</span></div>
+<div id="communityPaperList"></div><div id="communityLeaderboard" class="community-leaderboard hidden"></div>
+</div>
+</main>
+
+<main id="preview" class="screen hidden"><div class="card"><h2>📋 Test Preview</h2><div id="previewText"></div><button class="btn" onclick="beginTest()">🚀 Start Test</button><button class="btn alt" onclick="show('setup')">← Edit</button></div></main>
+<main id="test" class="screen hidden"><div class="card"><div class="topbar"><b id="qnum"></b><div class="timer" id="timer">00:00</div></div><hr><div id="question"></div><div id="options"></div><button class="btn" onclick="nextQuestion()" id="nextBtn">Next →</button></div></main>
+<main id="results" class="screen hidden">
+  <div class="card">
+    <div class="results-header"><div><h2>📊 My Results</h2><p class="muted">Track attempts, answers and improvement for each exam.</p></div></div>
+    <div class="result-summary">
+      <div><strong id="resultTotal">0</strong><span>Tests</span></div>
+      <div><strong id="resultAverage">0%</strong><span>Average</span></div>
+      <div><strong id="resultBest">0%</strong><span>Best</span></div>
+    </div>
+    <div class="result-summary result-secondary-4">
+      <div><strong id="resultAttempted">0</strong><span>Attempted</span></div>
+      <div><strong id="resultCorrect">0</strong><span>Correct</span></div>
+      <div><strong id="resultWrong">0</strong><span>Wrong</span></div>
+      <div><strong id="resultLeft">0</strong><span>Left</span></div>
+    </div>
+    <div class="negative-box">Negative Marks Deducted: <strong id="resultNegative">0</strong></div>
+    <div id="comparisonBox" class="comparison hidden"></div>
+    <div id="resultsEmpty" class="results-empty"><div>📄</div><h3>No Results Yet</h3><p>Complete a mock test and your result will appear here.</p><button class="btn" onclick="show('explore')">🔎 Explore Exams</button></div>
+    <div id="resultsList"></div>
+  </div>
+</main>
+<main id="result" class="screen hidden"><div class="card result"><h2>🎉 Test Complete</h2><div class="score" id="score"></div><p id="resultInfo"></p>
+    </div>
+</main>
+<main id="profile" class="screen hidden">
+  <div class="card profile-card">
+
+    <div id="signedOutProfile">
+      <div class="auth-hero">
+        <div class="auth-logo">🎓</div>
+        <h2>Welcome to MockMaster</h2>
+        <p class="muted">Sign in to save your tests, results and progress across devices.</p>
+      </div>
+
+      <button class="auth-primary" onclick="openAuth('signin')">Sign In</button>
+      <button class="google-auth" onclick="googleAuth()">
+        <span class="google-g">G</span>
+        <span>Sign in with Google</span>
+      </button>
+
+      <div class="auth-divider"><span>OR</span></div>
+
+      <p class="auth-signup-text">Don't have an account?</p>
+      <button class="auth-secondary" onclick="openAuth('signup')">Sign Up</button>
+
+      <div class="auth-note">🔒 Your account will be securely connected with Firebase Authentication.</div>
+    </div>
+
+    <div id="signedInProfile">
+      <div class="profile-hero">
+        <div class="avatar" id="profileAvatar">👤</div>
+        <div>
+          <h2 id="profileDisplayName">Student</h2>
+          <p class="muted" id="profileDisplayEmail">student@mockmaster.app</p>
+        </div>
+      </div>
+
+      <div class="profile-stats">
+        <div><strong id="statTests">0</strong><span>Tests</span></div>
+        <div><strong id="statScore">0%</strong><span>Avg. Score</span></div>
+        <div><strong id="statTime">0m</strong><span>Practice</span></div>
+      </div>
+
+      <h3 class="section-title">Personal Information</h3>
+      <div class="profile-edit-hint">Tap any field below to edit it directly. Changes save automatically.</div>
+      <div class="profile-inline-row"><label>👤 Name</label><input id="inlineProfileName" class="profile-inline-input" type="text" placeholder="Enter your full name" onblur="saveInlineProfileField('name')"></div>
+      <div class="profile-inline-row"><label>📧 Email</label><strong id="infoEmail">student@mockmaster.app</strong></div>
+      <div class="profile-inline-row"><label>🎓 Class / Level</label><select id="inlineProfileClass" class="profile-inline-input profile-select" onchange="saveInlineProfileField('classLevel')">
+        <option value="">Select Class / Level</option><option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option><option>Undergraduate</option><option>Postgraduate</option><option>Other</option>
+      </select></div>
+      <div class="profile-inline-row"><label>📍 State / UT</label><select id="inlineProfileState" class="profile-inline-input profile-select" onchange="saveInlineProfileField('state')"><option value="">Select State / UT</option></select></div>
+      <div class="profile-inline-row"><label>🏫 Board</label><select id="inlineProfileBoard" class="profile-inline-input profile-select" onchange="saveInlineProfileField('board')"><option value="">Select Board</option></select></div>
+      <div class="profile-inline-row"><label>🏫 School / College</label><input id="inlineProfileSchool" class="profile-inline-input" type="text" placeholder="Optional" onblur="saveInlineProfileField('school')"></div>
+
+      <h3 class="section-title">Preferences</h3>
+      <div class="setting-row">
+        <div><strong>🌐 Question Language</strong><small>Default language for mock questions</small></div>
+        <select id="profileLanguage" onchange="saveProfilePreference()">
+          <option>English</option><option>हिन्दी</option><option>తెలుగు</option><option>मराठी</option>
+          <option>ಕನ್ನಡ</option><option>தமிழ்</option><option>বাংলা</option><option>ગુજરાતી</option>
+        </select>
+      </div>
+      <div class="setting-row">
+        <div><strong>🔔 Notifications</strong><small>Practice reminders and result updates</small></div>
+        <label class="switch"><input type="checkbox" id="profileNotifications" onchange="saveProfilePreference()"><span></span></label>
+      </div>
+
+      <h3 class="section-title">Account</h3>
+      <button class="profile-action" onclick="show('results')">📊 View My Results</button>
+      <button class="profile-action" onclick="alert('Account settings will be connected with Firebase in the next phase.')">⚙️ Account Settings</button>
+      <div id="profileAuthPrompt" class="auth-note" style="margin-top:12px">🔐 Sign in or sign up to sync this profile and your progress across devices.<br><button class="auth-secondary" style="margin-top:9px" onclick="openAuth('signin')">Sign In</button><button class="auth-primary" style="margin-top:8px" onclick="openAuth('signup')">Sign Up</button></div>
+      <button id="profileSignOutBtn" class="profile-action danger hidden" onclick="signOutDemo()">🚪 Sign Out</button>
+    </div>
+  </div>
+
+  <div id="profileEditModal" class="auth-modal hidden">
+    <div class="auth-modal-card profile-editor-card">
+      <button class="auth-close" onclick="closeProfileEditor()">×</button>
+      <div class="auth-modal-icon">✏️</div>
+      <h2>Edit Profile</h2>
+      <p class="muted">Set your required details so MockMaster can use the correct syllabus.</p>
+      <label class="auth-label">Full Name *</label>
+      <input class="auth-input" id="editProfileName" type="text" placeholder="Enter your full name">
+      <label class="auth-label">Class / Level *</label>
+      <select class="auth-input profile-select" id="editProfileClass">
+        <option value="">Select Class / Level</option>
+        <option>Class 6</option><option>Class 7</option><option>Class 8</option><option>Class 9</option><option>Class 10</option><option>Class 11</option><option>Class 12</option>
+        <option>Undergraduate</option><option>Postgraduate</option><option>Other</option>
+      </select>
+      <label class="auth-label">State / UT *</label>
+      <select class="auth-input profile-select" id="editProfileState" onchange="updateProfileBoardOptions()"><option value="">Select State / UT</option></select>
+      <label class="auth-label">Board *</label>
+      <select class="auth-input profile-select" id="editProfileBoard"><option value="">Select Board</option></select>
+      <label class="auth-label">School / College <span class="optional-label">(optional)</span></label>
+      <input class="auth-input" id="editProfileSchool" type="text" placeholder="Enter school / college name">
+      <button class="auth-primary" onclick="saveEditedProfile()">Save Profile</button>
+    </div>
+  </div>
+
+  <div id="authModal" class="auth-modal hidden">
+    <div class="auth-modal-card">
+      <button class="auth-close" onclick="closeAuth()">×</button>
+      <div class="auth-modal-icon">🎓</div>
+      <h2 id="authTitle">Sign In</h2>
+      <p class="muted" id="authSubtitle">Welcome back to MockMaster</p>
+
+      <label class="auth-label">Email</label>
+      <input class="auth-input" id="authEmail" type="email" placeholder="Enter your email">
+
+      <label class="auth-label">Password</label>
+      <input class="auth-input" id="authPassword" type="password" placeholder="Enter your password">
+
+      <div id="authConfirmWrap" class="hidden">
+        <label class="auth-label">Confirm Password</label>
+        <input class="auth-input" id="authConfirm" type="password" placeholder="Confirm your password">
+      </div>
+
+      <button class="auth-primary" onclick="submitAuth()" id="authSubmit">Sign In</button>
+
+      <div class="auth-divider"><span>OR</span></div>
+
+      <button class="google-auth" onclick="googleAuth()">
+        <span class="google-g">G</span>
+        <span id="googleAuthText">Sign in with Google</span>
+      </button>
+
+      <p class="auth-switch" id="authSwitchText">Don't have an account?
+        <button onclick="switchAuth('signup')">Sign Up</button>
+      </p>
+    </div>
+  </div>
+</main>
+<nav><button onclick="show('home')" id="n-home">⌂<br>Home</button><button onclick="show('explore')" id="n-explore">🔎<br>Explore</button><button onclick="show('results')" id="n-results">📊<br>Results</button><button onclick="show('profile')" id="n-profile">👤<br>Profile</button></nav>
+</div>
+<script>
+const STATES=["Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal","Andaman & Nicobar Islands","Chandigarh","Dadra & Nagar Haveli and Daman & Diu","Delhi","Jammu & Kashmir","Ladakh","Lakshadweep","Puducherry"];
+const LANG=["English","हिन्दी","मराठी","తెలుగు","தமிழ்","ಕನ್ನಡ","മലയാളം","ગુજરાતી","বাংলা","ਪੰਜਾਬੀ","ଓଡ଼ିଆ","অসমীয়া","اردو"];
+const sample=[
+["What is 12 × 8?","96","86","108","92"],["Which planet is known as the Red Planet?","Mars","Venus","Jupiter","Mercury"],["What is the square of 15?","225","215","250","125"],["Which gas is essential for human respiration?","Oxygen","Nitrogen","Hydrogen","Helium"],["If 2x + 6 = 16, what is x?","5","4","6","8"]
+];
+
+// Data-driven configuration. In the production app this object will come from Firebase/admin data.
+const EXAMS={
+ "State Board":{icon:"🏫",scope:"state",workflow:"state_board",title:"State Board Mock",fields:[
+  ["state","State / Union Territory",STATES],["year","Academic Year",["2026–27","2025–26"]],["level","Class",["Class 6","Class 7","Class 8","Class 9","Class 10","Class 11","Class 12"]],["subject","Subject",["Mathematics","Science","English","Social Science"]],["chapter","Chapter",["Chapter 1","Chapter 2","Algebra","Geometry"]],["topic","Topic",["Topic 1","Topic 2","Equations","Triangles"]],["language","Language",LANG]],pattern:"State determines the board context. Then academic year → class → subject → chapter → topic → language.",source:"Prototype configuration — official board syllabus/pattern verification will be stored per state and academic year."},
+ "CBSE":{icon:"📘",scope:"national",workflow:"national_board",title:"CBSE Mock",fields:[
+  ["year","Academic Year",["2026–27","2025–26"]],["level","Class",["Class 6","Class 7","Class 8","Class 9","Class 10","Class 11","Class 12"]],["subject","Subject",["Mathematics","Science","Social Science","English","Hindi"]],["chapter","Chapter",["Chapter 1","Chapter 2","Algebra","Geometry"]],["topic","Topic",["Topic 1","Topic 2","Linear Equations","Triangles"]],["language","Language",LANG]],pattern:"CBSE is a national-board workflow: academic year → class → subject → chapter → topic → language. No State/UT field.",source:"CBSE curriculum data should be versioned by academic year/session and official source."},
+ "ICSE":{icon:"📗",scope:"national",workflow:"national_board",title:"ICSE Mock",fields:[
+  ["year","Academic Year",["2026–27","2025–26"]],["level","Class",["Class 6","Class 7","Class 8","Class 9","Class 10","Class 11","Class 12"]],["subject","Subject",["Mathematics","Physics","Chemistry","Biology","English"]],["chapter","Chapter",["Chapter 1","Chapter 2","Algebra","Geometry"]],["topic","Topic",["Topic 1","Topic 2","Force and Motion","Chemical Reactions"]],["language","Language",LANG]],pattern:"ICSE national workflow: academic year → class → subject → chapter → topic → language. No State/UT field.",source:"Prototype configuration — official CISCE syllabus/pattern verification will be stored by session."},
+ "NEET UG":{icon:"🩺",scope:"national",workflow:"competitive",title:"NEET UG Mock",fields:[
+  ["year","Session / Year",["2026","2025"]],["paper","Test / Subject Scope",["Full NEET UG","Physics","Chemistry","Biology (Botany + Zoology)","Physics + Chemistry","Biology"]],["mock","Mock Type",["Full Exam","Subject Practice","Chapter/Topic Practice"]],["language","Language",LANG]],pattern:"NEET UG is built from Physics, Chemistry and Biology (Botany + Zoology). The selected subject scope controls the mock; it does not use school class/chapter fields by default.",source:"Official NTA NEET UG information bulletin and syllabus for the selected year."},
+ "JEE Main":{icon:"⚛️",scope:"national",workflow:"competitive",title:"JEE Main Mock",fields:[
+  ["year","Session / Year",["2026","2025"]],["paper","Paper",["Paper 1 (B.E./B.Tech.)","Paper 2A (B.Arch.)","Paper 2B (B.Planning)"]],["subject","Subject / Section",["Full Paper","Mathematics","Physics","Chemistry","Aptitude Test","Drawing Test","Planning Based Test"]],["mock","Mock Type",["Full Paper","Subject Practice","Section Practice"]],["language","Language",LANG]],pattern:"JEE Main has different papers and paper-specific subject/section structures. The builder exposes the relevant subject scope instead of using a school-board workflow.",source:"Official NTA JEE Main information bulletin for the selected session."},
+ "CUET UG":{icon:"🎓",scope:"national",workflow:"competitive",title:"CUET UG Mock",fields:[
+  ["year","Session / Year",["2026","2025"]],["paper","Test Paper Type",["Language","Domain Subject","General Aptitude Test"]],["subject","Subject / Test Paper(s)",[
+    "English","Hindi","Assamese","Bengali","Gujarati","Kannada","Malayalam","Marathi","Odia","Punjabi","Tamil","Telugu","Urdu",
+    "Accountancy / Book-Keeping","Agriculture","Anthropology","Biology / Biological Science / Biotechnology / Biochemistry","Business Studies","Chemistry","Environmental Science","Computer Science / Information Practices","Economics / Business Economics","Fine Arts / Visual Arts / Commercial Arts","Geography / Geology","History","Home Science","Knowledge Tradition-Practices in India","Mass Media / Mass Communication","Mathematics / Applied Mathematics","Performing Arts - Dance, Drama and Music","Physical Education (Yoga, Sports)","Physics","Political Science","Psychology","Sanskrit","Sociology","General Aptitude Test"
+  ]],["mock","Mock Type",["Single Test Paper","Multi-Subject Practice","Section Practice"]],["language","Question Language",LANG]],pattern:"CUET UG requires selection of test paper(s). The 2026 NTA syllabus lists language, domain and General Aptitude Test subjects. Multiple test papers can be selected in the real exam, so MockMaster treats Subject / Test Paper as a dedicated selection.",source:"Official NTA CUET UG 2026 syllabus and information bulletin."},
+ "SSC CGL":{icon:"📝",scope:"national",workflow:"competitive",title:"SSC CGL Mock",fields:[
+  ["year","Exam Cycle",["2026–27","2025–26"]],["paper","Tier",["Tier I","Tier II Paper-I","Tier II Paper-II (Statistics)","Tier II Paper-III (Finance & Accounts)","Tier II Paper-III (Economics & Finance)"]],["subject","Subject / Section",["Full Tier","General Intelligence & Reasoning","General Awareness","Quantitative Aptitude","English Comprehension","Mathematical Abilities","Reasoning & General Intelligence","Computer Knowledge Test","Data Entry Speed Test"]],["mock","Mock Type",["Full Tier","Subject Practice","Section Practice"]],["language","Language",LANG]],pattern:"SSC CGL has tier- and paper-specific sections. The 2026 notice defines Tier-I sections and Tier-II papers separately, so the mock builder must expose the selected tier/paper and its applicable sections.",source:"Official SSC CGL 2026 notification and scheme."},
+ "SSC CHSL":{icon:"📝",scope:"national",workflow:"competitive",title:"SSC CHSL Mock",fields:[
+  ["year","Exam Cycle",["2026–27","2025–26"]],["paper","Tier",["Tier I","Tier II"]],["subject","Subject / Section",["Full Tier","English Language","General Intelligence","Quantitative Aptitude","General Awareness","Mathematical Abilities","Reasoning & General Intelligence","English Language & Comprehension","General Awareness","Computer Knowledge Test","Skill / Typing Test"]],["mock","Mock Type",["Full Tier","Subject Practice","Section Practice"]],["language","Language",LANG]],pattern:"SSC CHSL uses tier-specific sections and skill components. The builder should load the exact sections and marking from the selected official exam-cycle record.",source:"Official SSC CHSL notification and scheme for the selected cycle."},
+ "NDA":{icon:"🪖",scope:"national",workflow:"competitive",title:"NDA & NA Mock",fields:[
+  ["year","Exam Cycle",["NDA/NA I 2026","NDA/NA II 2026","NDA/NA I 2025","NDA/NA II 2025"]],["paper","Paper",["Full Written Exam","Mathematics","General Ability Test"]],["subject","GAT Subject / Area",["Full GAT","English","General Knowledge","Physics","Chemistry","General Science","History","Geography","Current Events"]],["mock","Mock Type",["Full Exam","Paper Practice","Subject Practice"]],["language","Language",["English","Hindi"]]],pattern:"NDA written examination has Mathematics and General Ability Test papers. GAT contains English and General Knowledge areas; the builder separates paper and GAT-area selection.",source:"Official UPSC NDA & NA notification and syllabus for the selected cycle."},
+ "UPSC Civil Services":{icon:"🏛️",scope:"national",workflow:"competitive",title:"UPSC Civil Services Mock",fields:[
+  ["year","Exam Cycle",["2026","2025"]],["stage","Stage",["Preliminary Examination","Main Examination"]],["paper","Paper",["Prelims General Studies Paper-I","Prelims General Studies Paper-II (CSAT)","Mains Essay","Mains General Studies Paper-I","Mains General Studies Paper-II","Mains General Studies Paper-III","Mains General Studies Paper-IV","Optional Subject Paper-I","Optional Subject Paper-II"]],["subject","Subject / Area",["Full Paper","Current Affairs","History","Geography","Polity & Governance","Economic & Social Development","Environment & Ecology","Science & Technology","Comprehension","Interpersonal & Communication Skills","Logical Reasoning & Analytical Ability","Decision Making & Problem Solving","Essay"]],["mock","Mock Type",["Full Paper","Subject Practice","Section Practice"]],["language", "Language",["English","Hindi"]]],pattern:"UPSC Civil Services has separate Preliminary and Main stages, with paper-specific structures. MockMaster exposes stage, paper and subject/area instead of applying school-board fields.",source:"Official UPSC Civil Services examination notification, syllabus and question papers for the selected year."}
+}
+
+
+const DEP={
+  "CUET UG":{
+    paper:{
+      "Language":["English","Hindi","Assamese","Bengali","Gujarati","Kannada","Malayalam","Marathi","Odia","Punjabi","Tamil","Telugu","Urdu"],
+      "Domain Subject":["Accountancy / Book-Keeping","Agriculture","Anthropology","Biology / Biological Science / Biotechnology / Biochemistry","Business Studies","Chemistry","Environmental Science","Computer Science / Information Practices","Economics / Business Economics","Fine Arts / Visual Arts / Commercial Arts","Geography / Geology","History","Home Science","Knowledge Tradition-Practices in India","Mass Media / Mass Communication","Mathematics / Applied Mathematics","Performing Arts - (Dance, Drama and Music)","Physical Education (Yoga, Sports)","Physics","Political Science","Psychology","Sanskrit","Sociology"],
+      "General Aptitude Test":["General Aptitude Test"]
+    },
+    multi:true
+  },
+  "JEE Main":{
+    paper:{
+      "Paper 1 (B.E./B.Tech.)":["Full Paper","Mathematics","Physics","Chemistry"],
+      "Paper 2A (B.Arch.)":["Mathematics","Aptitude Test","Drawing Test"],
+      "Paper 2B (B.Planning)":["Mathematics","Aptitude Test","Planning Based Test"]
+    }
+  },
+  "NEET UG":{
+    paper:{
+      "Full NEET UG":["Full NEET UG"],
+      "Physics":["Physics"],
+      "Chemistry":["Chemistry"],
+      "Biology (Botany + Zoology)":["Biology (Botany + Zoology)"],
+      "Physics + Chemistry":["Physics","Chemistry"],
+      "Biology":["Biology (Botany + Zoology)"]
+    }
+  },
+  "SSC CGL":{
+    paper:{
+      "Tier I":["Full Tier I","General Intelligence & Reasoning","General Awareness","Quantitative Aptitude","English Comprehension"],
+      "Tier II Paper-I":["Full Paper-I","Mathematical Abilities","Reasoning & General Intelligence","English Language & Comprehension","General Awareness","Computer Knowledge Test"],
+      "Tier II Paper-II (Statistics)":["Statistics"],
+      "Tier II Paper-III (Finance & Accounts)":["Finance & Accounts"],
+      "Tier II Paper-III (Economics & Finance)":["Economics & Finance"]
+    }
+  },
+  "SSC CHSL":{
+    paper:{
+      "Tier I":["Full Tier I","English Language","General Intelligence","Quantitative Aptitude","General Awareness"],
+      "Tier II":["Full Tier II","Mathematical Abilities","Reasoning & General Intelligence","English Language & Comprehension","General Awareness","Computer Knowledge Test","Skill / Typing Test"]
+    }
+  },
+  "NDA":{
+    paper:{
+      "Full Written Exam":["Mathematics","General Ability Test"],
+      "Mathematics":["Mathematics"],
+      "General Ability Test":["Full GAT","English","Physics","Chemistry","General Science","History","Geography","Current Events"]
+    }
+  },
+  "UPSC Civil Services":{
+    stage:{
+      "Preliminary Examination":["Prelims General Studies Paper-I","Prelims General Studies Paper-II (CSAT)"],
+      "Main Examination":["Mains Essay","Mains General Studies Paper-I","Mains General Studies Paper-II","Mains General Studies Paper-III","Mains General Studies Paper-IV","Optional Subject Paper-I","Optional Subject Paper-II"]
+    },
+    paper:{
+      "Prelims General Studies Paper-I":["Full Paper","Current Affairs","History","Geography","Polity & Governance","Economic & Social Development","Environment & Ecology","Science & Technology"],
+      "Prelims General Studies Paper-II (CSAT)":["Full Paper","Comprehension","Logical Reasoning & Analytical Ability","Decision Making & Problem Solving"],
+      "Mains Essay":["Essay"],
+      "Mains General Studies Paper-I":["Indian Heritage & Culture","History & Geography","Society"],
+      "Mains General Studies Paper-II":["Governance","Constitution","Polity","Social Justice","International Relations"],
+      "Mains General Studies Paper-III":["Technology","Economic Development","Biodiversity","Environment","Security & Disaster Management"],
+      "Mains General Studies Paper-IV":["Ethics","Integrity","Aptitude"],
+      "Optional Subject Paper-I":["Optional Subject"],
+      "Optional Subject Paper-II":["Optional Subject"]
+    }
+  }
+};
+
+
+const MORE_EXAMS={
+ "UGC-NET":{icon:"🎓",scope:"national",workflow:"competitive",title:"UGC-NET Mock",fields:[["year","Session / Year",["June 2026","December 2026","June 2025","December 2025"]],["paper","Paper",["Paper I","Paper II","Paper I + II"]],["subject","Subject",["Teaching & Research Aptitude","Selected UGC-NET Subject"]],["mock","Mock Type",["Full Paper","Section Practice"]],["language","Question Language",LANG]],pattern:"Paper I plus subject-specific Paper II. The selected subject determines the Paper II syllabus.",source:"Official UGC-NET / NTA: https://ugcnet.nta.nic.in/"},
+ "CSIR-UGC NET":{icon:"🔬",scope:"national",workflow:"competitive",title:"CSIR-UGC NET Mock",fields:[["year","Session / Year",["June 2026","December 2026"]],["subject","Subject",["Chemical Sciences","Earth, Atmospheric, Ocean & Planetary Sciences","Life Sciences","Mathematical Sciences","Physical Sciences"]],["paper","Part",["Part A","Part B","Part C","Full Paper"]],["mock","Mock Type",["Full Paper","Part Practice"]],["language",["English","Hindi"]]],pattern:"Common Part A with subject-specific Parts B and C.",source:"Official CSIR-UGC NET / NTA: https://csirnet.nta.nic.in/"},
+ "CMAT":{icon:"📈",scope:"national",workflow:"competitive",title:"CMAT Mock",fields:[["year","Session / Year",["2026","2025"]],["subject","Section",["Quantitative Techniques & Data Interpretation","Logical Reasoning","Language Comprehension","General Awareness","Innovation & Entrepreneurship","Full Paper"]],["mock","Mock Type",["Full Paper","Section Practice"]],["language",["English"]]],pattern:"Section-based management aptitude test.",source:"Official CMAT / NTA: https://cmat.nta.nic.in/"},
+ "JIPMAT":{icon:"🏫",scope:"national",workflow:"competitive",title:"JIPMAT Mock",fields:[["year","Session / Year",["2026","2025"]],["subject","Section",["Quantitative Aptitude","Data Interpretation & Logical Reasoning","Verbal Ability & Reading Comprehension","Full Paper"]],["mock","Mock Type",["Full Paper","Section Practice"]],["language",["English"]]],pattern:"Integrated management entrance with three aptitude areas.",source:"Official JIPMAT / NTA: https://exams.nta.nic.in/jipmat/"},
+ "AIAPGET":{icon:"🩺",scope:"national",workflow:"competitive",title:"AIAPGET Mock",fields:[["year","Session / Year",["2026","2025"]],["stream","AYUSH Stream",["Ayurveda","Homoeopathy","Siddha","Unani"]],["subject","Subject",["Full Paper","Stream-specific syllabus"]],["mock","Mock Type",["Full Paper","Subject Practice"]],["language",["English","Hindi"]]],pattern:"AYUSH postgraduate entrance; stream determines the syllabus.",source:"Official AIAPGET / NTA: https://exams.nta.nic.in/aiapget/"},
+ "NCHM JEE":{icon:"🍽️",scope:"national",workflow:"competitive",title:"NCHM JEE Mock",fields:[["year","Session / Year",["2026","2025"]],["subject","Section",["Numerical Ability & Analytical Aptitude","Reasoning & Logical Deduction","English Language","General Knowledge & Current Affairs","Aptitude for Service Sector","Full Paper"]],["mock","Mock Type",["Full Paper","Section Practice"]],["language",["English","Hindi"]]],pattern:"Hotel-management entrance with section-specific practice.",source:"Official NCHM JEE / NTA: https://exams.nta.nic.in/nchm-jee/"},
+ "AISSEE":{icon:"🏫",scope:"national",workflow:"school_entrance",title:"AISSEE Mock",fields:[["year","Session / Year",["2027","2026"]],["level","Class",["Class 6","Class 9"]],["subject","Subject",["Mathematics","Language","Intelligence","General Knowledge","Science","Social Science"]],["mock","Mock Type",["Full Paper","Subject Practice"]],["language",LANG]],pattern:"Class-specific Sainik School entrance paper structure.",source:"Official AISSEE / NTA: https://exams.nta.nic.in/sainik-school-society/"},
+ "CUET PG":{icon:"🎓",scope:"national",workflow:"competitive",title:"CUET PG Mock",fields:[["year","Session / Year",["2026","2025"]],["subject","Test Paper / Subject",["Select CUET-PG Test Paper"]],["mock","Mock Type",["Full Test Paper","Section Practice"]],["language",LANG]],pattern:"Postgraduate test-paper selection is programme/subject specific.",source:"Official CUET-PG / NTA: https://exams.nta.nic.in/cuet-pg/"},
+ "ICAR AIEEA PG":{icon:"🌾",scope:"national",workflow:"competitive",title:"ICAR AIEEA PG Mock",fields:[["year","Session / Year",["2026","2025"]],["subject","Discipline",["Agriculture","Agricultural Engineering","Horticulture","Forestry","Animal Sciences","Fisheries","Dairy Science","Food Science"]],["mock","Mock Type",["Full Paper","Subject Practice"]],["language",["English","Hindi"]]],pattern:"Discipline-specific agricultural postgraduate entrance.",source:"Official ICAR / NTA: https://exams.nta.nic.in/icar/"},
+ "SSC MTS":{icon:"📝",scope:"national",workflow:"competitive",title:"SSC MTS Mock",fields:[["year","Exam Cycle",["2026","2025"]],["paper","Session",["Session-I","Session-II","Full CBE"]],["subject","Section",["Numerical and Mathematical Ability","Reasoning Ability and Problem Solving","General Awareness","English Language and Comprehension","Full Paper"]],["mock","Mock Type",["Full CBE","Section Practice"]],["language",LANG]],pattern:"SSC MTS CBT is session/section specific.",source:"Official SSC: https://ssc.gov.in/"},
+ "SSC GD Constable":{icon:"🛡️",scope:"national",workflow:"competitive",title:"SSC GD Constable Mock",fields:[["year","Exam Cycle",["2027","2026"]],["subject","Section",["General Intelligence & Reasoning","General Knowledge & General Awareness","Elementary Mathematics","English / Hindi","Full Paper"]],["mock","Mock Type",["Full Paper","Section Practice"]],["language",LANG]],pattern:"CBT followed by recruitment stages defined in the official notice.",source:"Official SSC: https://ssc.gov.in/"},
+ "SSC CPO":{icon:"👮",scope:"national",workflow:"competitive",title:"SSC CPO Mock",fields:[["year","Exam Cycle",["2026","2025"]],["paper","Paper",["Paper-I","Paper-II","Full Examination"]],["subject","Section",["General Intelligence & Reasoning","General Knowledge & General Awareness","Quantitative Aptitude","English Comprehension","Full Paper"]],["mock","Mock Type",["Full Paper","Section Practice"]],["language",LANG]],pattern:"Paper-specific CBT sections plus subsequent recruitment stages.",source:"Official SSC: https://ssc.gov.in/"},
+ "SSC Stenographer":{icon:"⌨️",scope:"national",workflow:"competitive",title:"SSC Stenographer Mock",fields:[["year","Exam Cycle",["2026","2025"]],["grade","Grade",["Grade C","Grade D"]],["subject","Section",["General Intelligence & Reasoning","General Awareness","English Language & Comprehension","Full Paper"]],["mock","Mock Type",["Full Paper","Section Practice"]],["language",LANG]],pattern:"CBT plus grade-specific skill test.",source:"Official SSC: https://ssc.gov.in/"},
+ "SSC JE":{icon:"🛠️",scope:"national",workflow:"competitive",title:"SSC JE Mock",fields:[["year","Exam Cycle",["2026","2025"]],["discipline","Engineering Discipline",["Civil","Electrical","Mechanical"]],["paper","Paper",["Paper-I","Paper-II","Full Examination"]],["subject","Section",["General Intelligence & Reasoning","General Awareness","General Engineering","Civil Engineering","Electrical Engineering","Mechanical Engineering"]],["mock","Mock Type",["Full Paper","Section Practice"]],["language",LANG]],pattern:"Engineering-discipline specific technical syllabus.",source:"Official SSC: https://ssc.gov.in/"},
+ "UPSC ESE":{icon:"⚙️",scope:"national",workflow:"competitive",title:"UPSC Engineering Services Mock",fields:[["year","Exam Cycle",["2026","2025"]],["stage","Stage",["Preliminary","Main"]],["discipline","Engineering Discipline",["Civil","Mechanical","Electrical","Electronics & Telecommunication"]],["paper","Paper",["General Studies & Engineering Aptitude","Engineering Discipline Paper-I","Engineering Discipline Paper-II"]],["mock","Mock Type",["Full Paper","Paper Practice"]],["language",["English","Hindi"]]],pattern:"Common/general and engineering-discipline papers.",source:"Official UPSC: https://www.upsc.gov.in/"},
+ "UPSC CDS":{icon:"🪖",scope:"national",workflow:"competitive",title:"UPSC CDS Mock",fields:[["year","Exam Cycle",["CDS (II) 2026","CDS (I) 2026"]],["academy","Academy",["IMA","INA","AFA","OTA"]],["subject","Paper",["English","General Knowledge","Elementary Mathematics","Full Written Exam"]],["mock","Mock Type",["Full Exam","Paper Practice"]],["language",["English","Hindi"]]],pattern:"Paper combination depends on the academy.",source:"Official UPSC: https://www.upsc.gov.in/"},
+ "UPSC CAPF":{icon:"🛡️",scope:"national",workflow:"competitive",title:"UPSC CAPF AC Mock",fields:[["year","Exam Cycle",["2026","2025"]],["paper","Paper",["Paper-I General Ability & Intelligence","Paper-II General Studies, Essay & Comprehension","Full Written Exam"]],["subject","Area",["General Ability & Intelligence","General Studies","Essay","Comprehension","Full Paper"]],["mock","Mock Type",["Full Exam","Paper Practice"]],["language",["English","Hindi"]]],pattern:"Two written papers with distinct structures.",source:"Official UPSC: https://www.upsc.gov.in/"},
+ "UPSC CMS":{icon:"🩺",scope:"national",workflow:"competitive",title:"UPSC Combined Medical Services Mock",fields:[["year","Exam Cycle",["2026","2025"]],["paper","Paper",["Paper-I","Paper-II","Full Examination"]],["subject","Subject",["General Medicine","Paediatrics","Surgery","Gynaecology & Obstetrics","Preventive & Social Medicine","Full Paper"]],["mock","Mock Type",["Full Exam","Paper Practice"]],["language",["English"]]],pattern:"Two-paper medical examination.",source:"Official UPSC: https://www.upsc.gov.in/"},
+ "UPSC IES / ISS":{icon:"📊",scope:"national",workflow:"competitive",title:"UPSC IES / ISS Mock",fields:[["year","Exam Cycle",["2026","2025"]],["exam","Exam",["Indian Economic Service","Indian Statistical Service"]],["subject","Paper",["General English","General Studies","Economics","Statistics","Full Examination"]],["mock","Mock Type",["Full Exam","Paper Practice"]],["language",["English"]]],pattern:"IES and ISS have separate specialist papers.",source:"Official UPSC: https://www.upsc.gov.in/"},
+ "NATA":{icon:"🏗️",scope:"national",workflow:"competitive",title:"NATA Mock",fields:[["year","Session / Year",["2026","2025"]],["subject","Area",["Mathematics & Logical Reasoning","Drawing / Composition","General Aptitude","Full Test"]],["mock","Mock Type",["Full Test","Area Practice"]],["language",["English"]]],pattern:"Architecture aptitude areas follow the current official NATA pattern.",source:"Official NATA: https://www.nata.in/"},
+ "CLAT UG":{icon:"⚖️",scope:"national",workflow:"competitive",title:"CLAT UG Mock",fields:[["year","Session / Year",["2027","2026"]],["subject","Section",["English Language","Current Affairs & General Knowledge","Legal Reasoning","Logical Reasoning","Quantitative Techniques","Full Paper"]],["mock","Mock Type",["Full Paper","Section Practice"]],["language",["English"]]],pattern:"Law entrance with section-specific practice.",source:"Official Consortium of NLUs: https://consortiumofnlus.ac.in/"},
+ "AILET":{icon:"⚖️",scope:"national",workflow:"competitive",title:"AILET Mock",fields:[["year","Session / Year",["2027","2026"]],["subject","Section",["English Language","Current Affairs & General Knowledge","Logical Reasoning","Full Paper"]],["mock","Mock Type",["Full Paper","Section Practice"]],["language",["English"]]],pattern:"NLU Delhi law entrance with section-specific practice.",source:"Official NLU Delhi: https://nationallawuniversitydelhi.in/"},
+ "UCEED":{icon:"🎨",scope:"national",workflow:"competitive",title:"UCEED Mock",fields:[["year","Session / Year",["2027","2026"]],["subject","Part",["Part-A","Part-B","Full Paper"]],["mock","Mock Type",["Full Paper","Part Practice"]],["language",["English"]]],pattern:"Design entrance with Part-A objective and Part-B visual response.",source:"Official IIT Bombay UCEED: https://www.uceed.iitb.ac.in/"},
+ "NID DAT":{icon:"🎨",scope:"national",workflow:"competitive",title:"NID DAT Mock",fields:[["year","Session / Year",["2027","2026"]],["stage","Stage",["DAT Prelims","DAT Mains"]],["subject","Area",["Design Aptitude","Drawing / Visualization","Studio / Interview Components"]],["mock","Mock Type",["Full Stage","Area Practice"]],["language",["English"]]],pattern:"Stage-specific design aptitude structure.",source:"Official NID admissions: https://admissions.nid.edu/"},
+ "CAT":{icon:"📈",scope:"national",workflow:"competitive",title:"CAT Mock",fields:[["year","Session / Year",["CAT 2026","CAT 2025"]],["subject","Section",["VARC","DILR","QA","Full Test"]],["mock","Mock Type",["Full Test","Section Practice"]],["language",["English"]]],pattern:"VARC, DILR and QA sections; exact session scheme is versioned.",source:"Official CAT/IIM: https://iimcat.ac.in/"},
+ "XAT":{icon:"📈",scope:"national",workflow:"competitive",title:"XAT Mock",fields:[["year","Session / Year",["XAT 2027","XAT 2026"]],["subject","Section",["Verbal Ability & Logical Reasoning","Decision Making","Quantitative Aptitude & Data Interpretation","General Knowledge","Full Test"]],["mock","Mock Type",["Full Test","Section Practice"]],["language",["English"]]],pattern:"Session-specific management aptitude sections.",source:"Official XAT: https://xatonline.in/"},
+ "MAT":{icon:"📈",scope:"national",workflow:"competitive",title:"MAT Mock",fields:[["year","Session / Year",["MAT 2026","MAT 2025"]],["subject","Section",["Language Comprehension","Intelligence & Critical Reasoning","Mathematical Skills","Data Analysis & Sufficiency","Economic & Business Environment","Full Test"]],["mock","Mock Type",["Full Test","Section Practice"]],["language",["English"]]],pattern:"Management aptitude sections; exact mode/pattern follows AIMA.",source:"Official AIMA MAT: https://mat.aima.in/"},
+ "NMAT":{icon:"📈",scope:"national",workflow:"competitive",title:"NMAT by GMAC Mock",fields:[["year","Session / Year",["NMAT 2026","NMAT 2025"]],["subject","Section",["Language Skills","Quantitative Skills","Logical Reasoning","Full Test"]],["mock","Mock Type",["Full Test","Section Practice"]],["language",["English"]]],pattern:"Computer-adaptive management entrance with section-specific practice.",source:"Official GMAC NMAT: https://www.mba.com/exams/nmat"},
+ "CTET":{icon:"👩‍🏫",scope:"national",workflow:"teacher_eligibility",title:"CTET Mock",fields:[["year","Session",["December 2026","July 2026","December 2025"]],["paper","Paper",["Paper I","Paper II","Paper I + II"]],["subject","Subject / Section",["Child Development & Pedagogy","Mathematics","Environmental Studies","Language I","Language II","Mathematics & Science","Social Studies / Social Science"]],["mock","Mock Type",["Full Paper","Section Practice"]],["language",LANG]],pattern:"Paper I and Paper II have different subject combinations.",source:"Official CTET: https://ctet.nic.in/"},
+ "IBPS PO":{icon:"🏦",scope:"national",workflow:"banking",title:"IBPS PO/MT Mock",fields:[["year","CRP Cycle",["CRP PO/MT-XVI","CRP PO/MT-XV"]],["stage","Stage",["Preliminary","Main"]],["subject","Section",["English Language","Quantitative Aptitude","Reasoning Ability","Reasoning & Computer Aptitude","Data Analysis & Interpretation","General/Economy/Banking Awareness","English Language (Descriptive)","Full Paper"]],["mock","Mock Type",["Full Stage","Section Practice"]],["language",["English","Hindi"]]],pattern:"Preliminary and Main stages have different section structures.",source:"Official IBPS: https://www.ibps.in/"},
+ "IBPS CSA":{icon:"🏦",scope:"national",workflow:"banking",title:"IBPS Customer Service Associate Mock",fields:[["year","CRP Cycle",["CRP CSA-XVI","CRP CSA-XV"]],["stage","Stage",["Preliminary","Main"]],["subject","Section",["English Language","Numerical Ability","Reasoning Ability","General/Financial Awareness","Quantitative Aptitude","Full Paper"]],["mock","Mock Type",["Full Stage","Section Practice"]],["language",["English","Hindi"]]],pattern:"CSA/Clerk recruitment uses Preliminary and Main structures.",source:"Official IBPS: https://www.ibps.in/"},
+ "IBPS SO":{icon:"🏦",scope:"national",workflow:"banking",title:"IBPS Specialist Officer Mock",fields:[["year","CRP Cycle",["CRP SPL-XVI","CRP SPL-XV"]],["stage","Stage",["Preliminary","Main"]],["subject","Specialist Stream",["IT Officer","Agricultural Field Officer","Rajbhasha Adhikari","Law Officer","HR/Personnel Officer","Marketing Officer","General Awareness / Banking","Professional Knowledge"]],["mock","Mock Type",["Full Stage","Professional Knowledge"]],["language",["English","Hindi"]]],pattern:"Specialist stream determines the professional-knowledge syllabus.",source:"Official IBPS: https://www.ibps.in/"},
+ "IBPS RRB":{icon:"🏦",scope:"national",workflow:"banking",title:"IBPS RRB Mock",fields:[["year","CRP Cycle",["CRP RRBs-XV","CRP RRBs-XIV"]],["post","Post",["Officer Scale I","Officer Scale II","Officer Scale III","Office Assistant"]],["stage","Stage",["Preliminary","Main / Single"]],["subject","Section",["Reasoning","Quantitative Aptitude","Computer Knowledge","General Awareness","English/Hindi Language","Professional Knowledge","Agriculture","Full Paper"]],["mock","Mock Type",["Full Stage","Section Practice"]],["language",["English","Hindi"]]],pattern:"Post and stage determine the section structure.",source:"Official IBPS: https://www.ibps.in/"},
+ "RRB NTPC":{icon:"🚆",scope:"national",workflow:"railway",title:"RRB NTPC Mock",fields:[["year","Recruitment Cycle",["2026","2025"]],["level","Level",["Undergraduate","Graduate"]],["stage","Stage",["CBT 1","CBT 2","CBT 1 + CBT 2"]],["subject","Section",["General Awareness","Mathematics","General Intelligence & Reasoning","Full Paper"]],["mock","Mock Type",["Full CBT","Section Practice"]],["language",LANG]],pattern:"Railway NTPC varies by qualification level and CBT stage.",source:"Official Railway Recruitment Boards: https://www.rrbcdg.gov.in/"},
+ "RRB Group D":{icon:"🚆",scope:"national",workflow:"railway",title:"RRB Group D Mock",fields:[["year","Recruitment Cycle",["2026","2025"]],["subject","Section",["General Science","Mathematics","General Intelligence & Reasoning","General Awareness & Current Affairs","Full Paper"]],["mock","Mock Type",["Full CBT","Section Practice"]],["language",LANG]],pattern:"Level-1 CBT with four broad sections.",source:"Official Railway Recruitment Boards: https://www.rrbcdg.gov.in/"},
+ "RRB ALP":{icon:"🚆",scope:"national",workflow:"railway",title:"RRB ALP Mock",fields:[["year","Recruitment Cycle",["2026","2025"]],["stage","Stage",["CBT 1","CBT 2","CBT 1 + CBT 2"]],["subject","Section",["Mathematics","Mental Ability","General Science","General Awareness","Basic Science & Engineering","Trade-specific"]],["mock","Mock Type",["Full CBT","Section Practice"]],["language",LANG]],pattern:"Assistant Loco Pilot uses stage-specific CBT structures and a trade component.",source:"Official Railway Recruitment Boards: https://www.rrbcdg.gov.in/"},
+ "RRB Technician":{icon:"🔧",scope:"national",workflow:"railway",title:"RRB Technician Mock",fields:[["year","Recruitment Cycle",["2026","2025"]],["grade","Grade",["Grade I Signal","Grade III"]],["subject","Section",["Mathematics","General Intelligence & Reasoning","General Science","General Awareness","Basic Computer","Trade-specific"]],["mock","Mock Type",["Full CBT","Section Practice"]],["language",LANG]],pattern:"Grade-specific technical syllabus and CBT structure.",source:"Official Railway Recruitment Boards: https://www.rrbcdg.gov.in/"},
+ "RRB JE":{icon:"🔧",scope:"national",workflow:"railway",title:"RRB JE Mock",fields:[["year","Recruitment Cycle",["2026","2025"]],["discipline","Discipline",["Civil","Electrical","Electronics","Mechanical","Computer Science / IT","Other JE Discipline"]],["stage","Stage",["CBT 1","CBT 2","CBT 1 + CBT 2"]],["subject","Section",["Mathematics","General Intelligence & Reasoning","General Awareness","General Science","Technical Abilities","Full Paper"]],["mock","Mock Type",["Full CBT","Section Practice"]],["language",LANG]],pattern:"Technical discipline and CBT stage determine the syllabus.",source:"Official Railway Recruitment Boards: https://www.rrbcdg.gov.in/"},
+ "RRB RPF":{icon:"🛡️",scope:"national",workflow:"railway",title:"RPF/RPSF Mock",fields:[["year","Recruitment Cycle",["2026","2025"]],["post","Post",["Constable","Sub-Inspector"]],["subject","Section",["General Awareness","Arithmetic","General Intelligence & Reasoning","Full Paper"]],["mock","Mock Type",["Full CBT","Section Practice"]],["language",LANG]],pattern:"Post-specific railway protection force CBT structure.",source:"Official Railway Recruitment Boards: https://www.rrbcdg.gov.in/"},
+ "State PSC Exams":{icon:"🏛️",scope:"state",workflow:"state_recruitment",title:"State PSC Mock",fields:[["state","State / UT",STATES],["year","Recruitment Year",["2026","2025"]],["exam","Exam",["State Civil Services / State Services","Group A / B","Assistant / Technical Services","Other State PSC Examination"]],["stage","Stage",["Preliminary","Main","Interview / Skill where applicable"]],["subject","Paper / Subject",["General Studies","Aptitude / CSAT","State General Knowledge","Optional / Technical Subject","Full Paper"]],["language",LANG]],pattern:"State PSC patterns differ by state, post and notification; the selected state controls the official syllabus.",source:"Official State Public Service Commission notification for the selected state/year."},
+ "State Police & Constable":{icon:"👮",scope:"state",workflow:"state_recruitment",title:"State Police Mock",fields:[["state","State / UT",STATES],["year","Recruitment Year",["2026","2025"]],["exam","Recruitment",["Constable","Sub-Inspector","Other Police Recruitment"]],["subject","Section",["General Knowledge","Reasoning","Numerical Ability","Language","State GK","Technical / Post-specific"]],["mock","Mock Type",["Full Written Test","Section Practice"]],["language",LANG]],pattern:"State police recruitment patterns differ by state and post; exact syllabus comes from the official notification.",source:"Official State Police Recruitment Board / Police notification for the selected state/year."}
+};
+Object.assign(EXAMS,MORE_EXAMS);
+
+let selectedExam="State Board",test=[],idx=0,answers=[],seconds=0,timerId,history=[];
+const $=id=>document.getElementById(id);
+function show(id, fromHash){
+  if(id==="results" && typeof purgeOldAttemptHistory==="function")purgeOldAttemptHistory();
+  if(id==="results" && typeof renderAttemptSelector==="function")setTimeout(renderAttemptSelector,0);
+if(id==="setup" && typeof communityRender==="function")setTimeout(communityRender,0);
+  if(!id)return;
+
+  // Hash navigation works reliably in Android content:// pages.
+  if(!fromHash){
+    const current=(location.hash||'#home').slice(1);
+    if(current!==id){
+      location.hash=id;
+      return;
+    }
+  }
+
+  updateHomeNewsBar(id);
+  document.querySelectorAll('.screen').forEach(x=>x.classList.add('hidden'));
+  const target=$(id); if(!target)return;
+  target.classList.remove('hidden');
+
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+  let n=$('n-'+id); if(n)n.classList.add('active');
+
+  const steps=$('steps');
+  if(steps)steps.innerHTML=id==='setup'
+    ?'<div class="dot on"></div><div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>'
+    :'';
+
+  if(id==='results' && typeof renderResults==='function')renderResults();
+  if(id==='profile' && typeof loadProfile==='function')loadProfile();
+  if(id==='home' && typeof initExamNewsTicker==='function' && !$('homeExamNewsTicker')?.dataset?.initialized){initExamNewsTicker(); $('homeExamNewsTicker').dataset.initialized='1';}
+}
+function optionHTML(arr){return arr.map(v=>`<option>${v}</option>`).join('')}
+let activeExamCategory="All";
+function examCategory(name,c){
+  if(c.workflow==="state_board"||c.scope==="state")return "State";
+  if(["CBSE","ICSE"].includes(name))return "School Boards";
+  if(name.startsWith("UPSC"))return "UPSC";
+  if(name.startsWith("SSC"))return "SSC";
+  if(name.startsWith("IBPS"))return "Banking";
+  if(name.startsWith("RRB"))return "Railways";
+  if(["JEE Main","NEET UG","CUET UG","UGC-NET","CSIR-UGC NET","CMAT","JIPMAT","AIAPGET","NCHM JEE","AISSEE","CUET PG","ICAR AIEEA PG"].includes(name))return "NTA";
+  if(["CAT","XAT","MAT","NMAT"].includes(name))return "Management";
+  if(["CLAT UG","AILET"].includes(name))return "Law";
+  if(["NATA","UCEED","NID DAT"].includes(name))return "Architecture & Design";
+  if(name==="CTET")return "Teaching";
+  return "Other";
+}
+
+const EXAM_NEWS=[
+  {text:"UPSC: Combined Geo-Scientist (Preliminary) Examination 2027 notification issued; applications close 22 Sep 2026.",url:"https://www.upsc.gov.in/examinations/Combined%20Geo-Scientist%20%28Preliminary%29%20Examination%2C%202027",expires:"2026-09-23"},
+  {text:"UPSC: NDA & NA (II) and CDS (II) 2026 provisional answer keys were uploaded on 16 Sep 2026.",url:"https://www.upsc.gov.in/",expires:"2026-09-17"},
+  {text:"UPSC: Annual Calendar 2027 is available on the official UPSC website.",url:"https://www.upsc.gov.in"},
+  {text:"SSC: CHSL 2026 Tier-I is scheduled in July–September 2026 under the 2026–27 tentative calendar.",url:"https://ssc.gov.in/api/attachment/uploads/masterData/ExamCalendar/Tentative_Calendar2026_27_08012026.pdf",expires:"2026-10-01"},
+  {text:"SSC: MTS & Havaldar 2026 examination is scheduled for September–November 2026 under the tentative calendar.",url:"https://ssc.gov.in/api/attachment/uploads/masterData/ExamCalendar/Tentative_Calendar2026_27_08012026.pdf",expires:"2026-12-01"},
+  {text:"IBPS: RRB Officer Scale I, II & III registration is open from 1–21 Sep 2026.",url:"https://ibpsreg.ibps.in/rrbxvaug26/index.php?stat=0",expires:"2026-09-22"},
+  {text:"IBPS: Officers recruitment Project 2026-27/02 opened on 10 Sep 2026; registration closes 25 Sep 2026.",url:"https://ibpsreg.ibps.in/boiaug26/index.php?stat=0",expires:"2026-09-26"}
+];
+function initExamNewsTicker(){
+  const box=$("homeExamNewsTicker");
+  if(!box)return;
+
+  // Remove notifications whose stated date/deadline has already passed.
+  // The expiry date is exclusive: an item is shown through the date before `expires`.
+  const today=new Date();
+  const todayKey=`${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,"0")}-${String(today.getDate()).padStart(2,"0")}`;
+  const activeNews=EXAM_NEWS.filter(n=>!n.expires || todayKey<n.expires);
+  if(!activeNews.length){box.innerHTML="";return;}
+
+  // Duplicate the active headlines so the TV-style strip remains continuous.
+  const items=[...activeNews,...activeNews];
+  const html=items.map(n=>`
+    <a class="exam-news-item" href="${n.url}" target="_blank" rel="noopener noreferrer">
+      <span class="bullet">•</span><span>${n.text}</span>
+    </a>`).join("");
+
+  box.innerHTML=html;
+  box.style.animation="none";
+  void box.offsetWidth;
+  box.style.animation="mockmasterNewsScroll 45s linear infinite";
+}
+
+function updateHomeNewsBar(screenId){
+  const bar=$("homeNewsBar");
+  if(!bar)return;
+  bar.style.display=(screenId==="home")?"block":"none";
+}
+function renderExplore(){
+  const tabs=["All","School Boards","NTA","UPSC","SSC","Banking","Railways","Management","Law","Architecture & Design","Teaching","State","Other"];
+  $("categoryTabs").innerHTML=tabs.map(x=>`<button class="${activeExamCategory===x?"active":""}" onclick="activeExamCategory='${x}';renderExplore()">${x}</button>`).join("");
+  const q=($("examSearch")?.value||"").trim().toLowerCase();
+  const entries=Object.entries(EXAMS).filter(([name,c])=>(activeExamCategory==="All"||examCategory(name,c)===activeExamCategory)&&(!q||name.toLowerCase().includes(q)));
+  $("examTiles").innerHTML=entries.map(([name,c])=>`<button class="tile" onclick="openExam('${name.replace(/'/g,"\\'")}')"><span>${c.icon}</span>${name}</button>`).join("")||`<p class="muted">No matching exam found.</p>`;
+}
+function openExam(name){selectedExam=name;const c=EXAMS[name];show('setup');$('setupTitle').textContent=c.icon+' '+c.title;$('workflowInfo').innerHTML=`<span class="badge">${c.scope==='state'?'STATE-SCOPED':'NATIONAL'}</span> &nbsp; <span class="workflow">Workflow: ${c.workflow}</span>`;renderFields(c);$('patternBox').innerHTML=`<b>Pattern logic</b><br>${c.pattern}<div class="source">${c.source}</div>`}
+const multiState={};
+function renderFields(c){
+  $('fields').innerHTML=c.fields.map(([id,label,options])=>{
+    const opts=options||[];
+    if(selectedExam==="CUET UG" && id==="subject"){
+      multiState.subject=[];
+      return `<div class="field"><label>${label}</label>
+        <div class="multi" id="multi_subject">
+          <button type="button" class="multi-btn" id="multi_btn_subject" onclick="toggleMulti('subject')">Select test paper(s)</button>
+          <div class="multi-menu hidden" id="multi_menu_subject">
+            <div class="multi-hint">Select up to 5 test papers</div>
+            <div id="multi_options_subject"></div>
+          </div>
+        </div>
+      </div>`;
+    }
+    return `<div class="field"><label for="f_${id}">${label}</label><select id="f_${id}" onchange="fieldChanged('${id}')">${optionHTML(opts)}</select></div>`;
+  }).join('');
+  applyDependencies();
+}
+function toggleMulti(id){
+  const menu=$('multi_menu_'+id), btn=$('multi_btn_'+id);
+  if(!menu)return;
+  const opening=menu.classList.contains('hidden');
+  menu.classList.toggle('hidden',!opening);
+  btn.classList.toggle('open',opening);
+}
+function closeMulti(id){
+  const menu=$('multi_menu_'+id), btn=$('multi_btn_'+id);
+  if(menu)menu.classList.add('hidden');
+  if(btn)btn.classList.remove('open');
+}
+function renderMultiOptions(id,options){
+  const box=$('multi_options_'+id); if(!box)return;
+  const valid=new Set(options);
+  multiState[id]=(multiState[id]||[]).filter(v=>valid.has(v));
+  box.innerHTML=options.map((v,i)=>{
+    const checked=multiState[id].includes(v)?'checked':'';
+    return `<label class="multi-item"><input type="checkbox" ${checked} onchange="multiChanged('${id}',${i})"><span>${v}</span></label>`;
+  }).join('');
+  updateMultiButton(id);
+}
+function multiChanged(id,index){
+  const options=Array.from(document.querySelectorAll('#multi_options_'+id+' .multi-item span')).map(x=>x.textContent);
+  const v=options[index];
+  const list=multiState[id]||[];
+  const pos=list.indexOf(v);
+  if(pos>=0) list.splice(pos,1);
+  else if(list.length<5) list.push(v);
+  else { alert('You can select up to 5 test papers.'); return; }
+  multiState[id]=list;
+  renderMultiOptions(id,options);
+  // On mobile, close immediately after a checkbox selection.
+  closeMulti(id);
+}
+function updateMultiButton(id){
+  const btn=$('multi_btn_'+id); if(!btn)return;
+  const list=multiState[id]||[];
+  btn.textContent=list.length?list.join(', '):'Select test paper(s)';
+  btn.title=list.length ? list.join(', ') : 'Select test paper(s)';
+}
+document.addEventListener('click',e=>{
+  if(!e.target.closest('.multi')) closeMulti('subject');
+});
+function setOptions(id, options){
+  const e=$('f_'+id); if(!e) return;
+  const old=e.value;
+  e.innerHTML=optionHTML(options);
+  if(options.includes(old)) e.value=old;
+}
+function fieldChanged(id){
+  if(selectedExam==="CUET UG" && id==="paper"){
+    multiState.subject=[];
+    closeMulti('subject');
+  }
+  applyDependencies();
+}
+function applyDependencies(){
+  const d=DEP[selectedExam]; if(!d) return;
+
+  // CUET/JEE/NEET/SSC/NDA: Paper/Test selection controls Subject/Section.
+  if(d.paper && $('f_paper') && $('f_subject')){
+    const key=$('f_paper').value;
+    const opts=d.paper[key] || [];
+    setOptions('subject',opts);
+  }
+
+  // UPSC: Stage controls Paper, then Paper controls Subject/Area.
+  if(d.stage && $('f_stage') && $('f_paper')){
+    const key=$('f_stage').value;
+    setOptions('paper',d.stage[key] || []);
+  }
+  if(d.paper && selectedExam==="UPSC Civil Services" && $('f_paper') && $('f_subject')){
+    setOptions('subject',d.paper[$('f_paper').value] || []);
+  }
+
+  // Board workflow: class controls a prototype subject set; subject controls
+  // the available chapter/topic choices. Production data will replace these.
+  if(["State Board","CBSE","ICSE"].includes(selectedExam)){
+    const level=$('f_level'), subject=$('f_subject'), chapter=$('f_chapter'), topic=$('f_topic');
+    if(level && subject){
+      const cls=level.value;
+      const subjectSets={
+        "Class 6":["Mathematics","Science","English","Social Science"],
+        "Class 7":["Mathematics","Science","English","Social Science"],
+        "Class 8":["Mathematics","Science","English","Social Science"],
+        "Class 9":["Mathematics","Science","English","Social Science"],
+        "Class 10":["Mathematics","Science","English","Social Science"],
+        "Class 11":["Mathematics","Physics","Chemistry","Biology","English"],
+        "Class 12":["Mathematics","Physics","Chemistry","Biology","English"]
+      };
+      if(selectedExam==="ICSE") subjectSets["Class 9"]=subjectSets["Class 9"].concat(["Physics","Chemistry","Biology"]);
+      setOptions('subject',subjectSets[cls]||[]);
+    }
+    const sm=subject?subject.value:"";
+    const chapterMap={
+      "Mathematics":["Chapter 1","Chapter 2","Algebra","Geometry"],
+      "Science":["Chapter 1","Chapter 2","Force and Motion","Chemical Reactions"],
+      "Physics":["Chapter 1","Motion","Force and Laws of Motion"],
+      "Chemistry":["Chapter 1","Chemical Reactions","Acids, Bases and Salts"],
+      "Biology":["Chapter 1","Life Processes","Control and Coordination"],
+      "English":["Chapter 1","Reading","Grammar"],
+      "Hindi":["Chapter 1","पाठ 1","व्याकरण"],
+      "Social Science":["Chapter 1","History","Geography","Civics"]
+    };
+    if(chapter) setOptions('chapter',chapterMap[sm]||["Chapter 1","Chapter 2"]);
+    const cm=chapter?chapter.value:"";
+    const topicMap={
+      "Algebra":["Linear Equations","Polynomials","Quadratic Concepts"],
+      "Geometry":["Triangles","Circles","Coordinate Geometry"],
+      "Force and Motion":["Motion","Force","Laws of Motion"],
+      "Chemical Reactions":["Types of Reactions","Balancing Equations"],
+      "Life Processes":["Nutrition","Respiration","Transportation"],
+      "History":["Chapter Topics","Important Events"],
+      "Geography":["Maps","Resources","Climate"],
+      "Civics":["Democracy","Constitution","Governance"]
+    };
+    if(topic) setOptions('topic',topicMap[cm]||["Topic 1","Topic 2"]);
+  }
+
+  // CUET uses a proper mobile-friendly multi-select dropdown.
+  // The available test papers depend on the selected Test Paper Type.
+  if(selectedExam==="CUET UG" && $('multi_options_subject')){
+    const key=$('f_paper') ? $('f_paper').value : "";
+    renderMultiOptions('subject',d.paper[key]||[]);
+  }
+}
+function getValue(id){
+  if(selectedExam==="CUET UG" && id==="subject") return (multiState.subject||[]).join(', ');
+  const e=$('f_'+id);if(!e)return '';return e.value;
+}
+function generate(){
+ const c=EXAMS[selectedExam];
+ let details=c.fields.map(([id,label])=>`${label}: ${getValue(id)}`).filter(x=>x.split(': ')[1]).join(' • ');
+ let n=10;
+ if(selectedExam==='NEET UG'&&getValue('paper')==='Full NEET UG')n=20;
+ if(selectedExam==='JEE Main'&&getValue('paper').startsWith('Paper 1')&&getValue('subject')==='Full Paper')n=20;
+ if(selectedExam==='CUET UG')n=Math.max(10,getValue('subject').split(', ').filter(Boolean).length*5);
+ test=Array.from({length:n},(_,i)=>sample[i%sample.length]);
+ answers=[];idx=0;
+
+ // Every generated paper is automatically added to this exam's Community Papers.
+ if(typeof saveGeneratedCommunityPaper==='function')saveGeneratedCommunityPaper(test,details);
+
+ $('previewText').innerHTML=`<p><span class="pill">${selectedExam}</span><span class="pill">${getValue('year')}</span></p><p><b>${details}</b></p><div class="pattern">${c.pattern}</div><p>Questions: ${n} • Language: ${getValue('language')} • Prototype mode</p><p class="muted">Pattern fields are now exam-specific. Final question counts, marks, duration, sections and negative marking will be read from the verified official exam-pattern record for the selected session.</p>`;
+ show('preview');
+}
+function beginTest(){idx=0;answers=[];seconds=10*60;clearInterval(timerId);timerId=setInterval(()=>{seconds--;renderTimer();if(seconds<=0)finish()},1000);show('test');renderQ()}
+function renderTimer(){$('timer').textContent=`${String(Math.floor(seconds/60)).padStart(2,'0')}:${String(seconds%60).padStart(2,'0')}`}
+function renderQ(){let q=test[idx];$('qnum').textContent=`Question ${idx+1} of ${test.length}`;$('question').innerHTML=`<div class="question">${q[0]}</div>`;$('options').innerHTML=q.slice(1).map((o,i)=>`<div class="opt ${answers[idx]===i?'sel':''}" onclick="pick(${i})">${String.fromCharCode(65+i)}. ${o}</div>`).join('');$('nextBtn').textContent=idx===test.length-1?'Submit Test':'Next →';$('nextBtn').onclick=idx===test.length-1?finish:nextQuestion;renderTimer()}
+function pick(i){answers[idx]=i;renderQ()}
+function nextQuestion(){
+  if(answers[idx]===undefined){alert('Please select an answer.');return}
+  if(idx===test.length-1){finish();return}
+  idx++;
+  renderQ();
+}
+function finish(){
+  clearInterval(timerId);
+  const total=test.length||0;
+  const correct=test.reduce((sum,q,i)=>sum+(answers[i]===0?1:0),0);
+  const attempted=answers.filter(a=>a!==undefined).length;
+  const wrong=answers.reduce((sum,a)=>sum+(a!==undefined&&a!==0?1:0),0);
+  const left=Math.max(0,total-attempted);
+  const pct=total?Math.round(correct/total*100):0;
+
+  history.unshift(`${selectedExam} • ${correct}/${total} • ${pct}%`);
+  if($("score"))$("score").textContent=`${correct}/${total}`;
+  if($("resultInfo"))$("resultInfo").innerHTML=`Accuracy: <b>${pct}%</b><br>${selectedExam}<br>${getValue('year')}`;
+  if($("history"))$("history").innerHTML=history.map(x=>`<p>📌 ${x}</p>`).join('');
+
+  // Save the completed attempt so Results can display it.
+  const result={
+    exam:selectedExam||"Mock Test",
+    paper:getValue('paper'),
+    subject:getValue('subject'),
+    stage:getValue('stage'),
+    language:getValue('language'),
+    score:pct,
+    attempted:attempted,
+    correct:correct,
+    wrong:wrong,
+    left:left,
+    negativeMarks:getConfiguredNegativeMarks(wrong),
+    questionCount:total,
+    questions:total,
+    answers:test.map((q,i)=>{
+      const opts=Array.isArray(q)?q.slice(1):Array.isArray(q.options)?q.options.slice():[];
+      const correct=opts.length?opts[0]:"";
+      const selected=answers[i]===undefined?"":opts[answers[i]]||"";
+      return {
+        question:Array.isArray(q)?q[0]:(q.question||("Question "+(i+1))),
+        options:opts,
+        selected:selected,
+        correct:correct,
+        status:selected?(selected===correct?"correct":"wrong"):"left"
+      };
+    }),
+    examCycle:getValue('examCycle')||getValue('session')||getValue('academicYear')||getValue('year')||"",
+    timeTaken:Math.max(0,Number(getValue('duration')||0)*60-Number(seconds||0)),
+    completed:true,
+    date:new Date().toISOString()
+  };
+  if(typeof saveMockResult==="function")saveMockResult(result);
+  if(typeof recordCompletedAttempt==="function")recordCompletedAttempt(result);
+
+  // Record a community attempt only after Submit Test completes.
+  if(window.selectedCommunityPaperId && typeof recordCommunityCompletion==="function"){
+    recordCommunityCompletion(window.selectedCommunityPaperId,pct,correct,wrong,left);
+  }
+
+  window.selectedCommunityPaperId=null;
+  show('result');
+}
+renderExplore();show('home');
+
+function resultData(){
+  try{return JSON.parse(localStorage.getItem("mockmaster_history")||"[]")}catch(e){return []}
+}
+
+function buildDemoAnswers(total){
+  const pool=[
+    ["Which option is correct?",["Option A","Option B","Option C","Option D"]],
+    ["Choose the correct answer.",["Answer A","Answer B","Answer C","Answer D"]],
+    ["Select the best answer.",["Choice A","Choice B","Choice C","Choice D"]]
+  ];
+  const arr=[];
+  for(let i=0;i<total;i++){
+    const q=pool[i%pool.length], correct=q[1][i%4];
+    const mode=i%5;
+    const selected=mode===0?correct:mode===1?q[1][(i+1)%4]:mode===2?q[1][(i+2)%4]:null;
+    arr.push({question:q[0],options:q[1],selected,correct,status:!selected?"left":selected===correct?"correct":"wrong"});
+  }
+  return arr;
+}
+
+
+function getConfiguredNegativeMarks(wrongCount){
+  const el=$("negative")||$("negativeMarking")||$("negMarking");
+  if(!el)return 0;
+  const raw=String(el.value||"").trim();
+  const m=raw.match(/-?\d+(?:\.\d+)?/);
+  if(!m)return 0;
+  return Math.abs(Number(m[0])||0)*wrongCount;
+}
+
+function saveMockResult(result){
+  const h=resultData();
+  h.unshift(result);
+  localStorage.setItem("mockmaster_history",JSON.stringify(h.slice(0,100)));
+  renderResults();
+  loadProfile();
+}
+
+function resultExamKey(r){
+  return [r.exam||"",r.paper||"",r.subject||"",r.stage||""].join("|").toLowerCase();
+}
+function getPreviousResult(current,index,h){
+  const key=resultExamKey(current);
+  for(let j=index+1;j<h.length;j++) if(resultExamKey(h[j])===key) return h[j];
+  return null;
+}
+function renderComparison(){
+  const h=resultData(), box=$("comparisonBox");
+  if(!box)return;
+  const latest=h[0];
+  if(!latest){box.classList.add("hidden");return}
+  const prev=getPreviousResult(latest,0,h);
+  if(!prev){box.classList.add("hidden");return}
+  const s1=Number(latest.score)||0,s0=Number(prev.score)||0;
+  const c1=Number(latest.correct)||0,c0=Number(prev.correct)||0;
+  const w1=Number(latest.wrong)||0,w0=Number(prev.wrong)||0;
+  const l1=Number(latest.left)||0,l0=Number(prev.left)||0;
+  const diff=s1-s0, cls=diff>0?"improve":diff<0?"downward":"same";
+  const text=diff>0?`📈 Improvement: +${diff} percentage points`
+    :diff<0?`📉 Downward: ${Math.abs(diff)} percentage points`
+    :"➖ No change in score";
+  box.innerHTML=`
+<div class="progress-card">
+  <h3>📈 Your Progress — Same Exam</h3>
+  <div class="attempt-select-wrap">
+    <label for="attemptExamSelect">Attempted Exams</label>
+    <select id="attemptExamSelect" onchange="renderAttemptHistory(this.value)">
+      <option value="">Select an attempted exam</option>
+    </select>
+  </div>
+  <div id="attemptHistory"></div>
+</div>
+
+    <div class="comparison-note ${cls}">${text}</div>`;
+  box.classList.remove("hidden");
+}
+
+function renderResults(){
+  const h=resultData(), list=$("resultsList"), empty=$("resultsEmpty");
+  if(!list||!empty)return;
+  $("resultTotal").textContent=h.length;
+  const scores=h.map(x=>Number(x.score)||0);
+  if($("resultAttempted"))$("resultAttempted").textContent=h.reduce((a,x)=>a+(Number(x.attempted)||0),0);
+  if($("resultNegative"))$("resultNegative").textContent=h.reduce((a,x)=>a+(Number(x.negativeMarks)||0),0);
+  if($("resultCorrect"))$("resultCorrect").textContent=h.reduce((a,x)=>a+(Number(x.correct)||0),0);
+  if($("resultWrong"))$("resultWrong").textContent=h.reduce((a,x)=>a+(Number(x.wrong)||0),0);
+  if($("resultLeft"))$("resultLeft").textContent=h.reduce((a,x)=>a+Math.max(0,(Number(x.questions||x.questionCount)||0)-(Number(x.attempted)||0)),0);
+  $("resultAverage").textContent=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length)+"%":"0%";
+  $("resultBest").textContent=scores.length?Math.max(...scores)+"%":"0%";
+  empty.classList.toggle("hidden",h.length>0);
+  renderComparison();
+  if(typeof renderAttemptSelector==="function")setTimeout(renderAttemptSelector,0);
+  list.innerHTML=h.map((r,i)=>`
+    <div class="result-item">
+      <div class="result-top">
+        <div><div class="result-name">${esc(r.exam||"Mock Test")}</div><div class="result-date">${esc(r.date||r.completedAt||"")}</div></div>
+        <div class="result-score">${Number(r.score)||0}%</div>
+      </div>
+      <div class="result-meta">
+        ${r.subject?`<span class="result-chip">📚 ${esc(r.subject)}</span>`:""}
+        ${r.language?`<span class="result-chip">🌐 ${esc(r.language)}</span>`:""}
+        ${(r.questions||r.questionCount)?`<span class="result-chip">📝 ${esc(r.questions||r.questionCount)} Questions</span>`:""}
+      </div>
+      <div class="result-bottom">
+        <span class="result-status">✓ Completed</span>
+        <span class="result-actions"><button type="button" onclick="viewResult(${i})">View Details</button></span>
+      </div>
+    </div>`).join("");
+}
+
+function esc(v){return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
+function viewResult(i){
+  const r=resultData()[i]; if(!r)return;
+  const total=Number(r.questions)||0, attempted=Number(r.attempted)||0,
+        correct=Number(r.correct)||0, wrong=Number(r.wrong)||0,
+        left=Math.max(0,total-attempted);
+  // Prefer the saved question-level sheet. If an older Results record does not
+  // contain it, recover it from the matching completed-attempt record when possible.
+  let answers=Array.isArray(r.answers)?r.answers:[];
+  if(!answers.length){
+    try{
+      const attempts=typeof attemptHistoryLoad==="function"?attemptHistoryLoad():[];
+      const rd=String(r.date||r.completedAt||"");
+      const match=attempts.find(a=>
+        Array.isArray(a.answers) && a.answers.length &&
+        String(a.exam||"")===String(r.exam||"") &&
+        String(a.completedAt||a.date||"")===rd
+      ) || attempts.find(a=>
+        Array.isArray(a.answers) && a.answers.length &&
+        String(a.exam||"")===String(r.exam||"") &&
+        Number(a.score||-1)===Number(r.score||-2)
+      );
+      if(match) answers=match.answers;
+    }catch(e){}
+  }
+  let modal=$("answerSheetModal");
+  if(!modal){
+    modal=document.createElement("div");
+    modal.id="answerSheetModal"; modal.className="answer-modal"; modal.onclick=(e)=>{if(e.target===modal)closeAnswerSheet();};
+    document.body.appendChild(modal);
+  }
+  modal.innerHTML=`<div class="answer-sheet">
+    <button class="answer-close" onclick="closeAnswerSheet()">×</button>
+    <h2>📄 Answer Sheet</h2>
+    <p class="muted">${esc(r.exam||"Mock Test")} • ${esc(r.date||"")}</p>
+    <div class="answer-summary">
+      <div class="attempted"><b>${attempted}</b><span>Attempted</span></div>
+      <div class="correct"><b>${correct}</b><span>Correct</span></div>
+      <div class="wrong"><b>${wrong}</b><span>Wrong</span></div>
+      <div class="left"><b>${left}</b><span>Left</span></div>
+    </div>
+    <div class="negative-box">➖ Negative marking: <strong>${Number(r.negativeMarks||0)}</strong> marks deducted</div>
+    <div class="answer-list">
+      ${answers.length ? answers.map((a,n)=>{
+        const st=a.status||(!a.selected?"left":(a.selected===a.correct?"correct":"wrong"));
+        return `<div class="answer-row ${st}">
+          <div class="answer-number">${n+1}</div>
+          <div class="answer-content">
+            <strong>${esc(a.question||("Question "+(n+1)))}</strong>
+            <div class="answer-options">${(a.options||[]).map((o,j)=>{
+              const letter=String.fromCharCode(65+j);
+              const selected=a.selected===o, correctOpt=a.correct===o;
+              return `<span class="${selected?"selected ":""}${correctOpt?"correct-option":""}">${letter}. ${esc(o)}${selected?" ✓":""}${correctOpt&&!selected?" ✓":""}</span>`;
+            }).join("")}</div>
+            <div class="answer-meta">
+              <span>Your answer: <b>${a.selected?esc(a.selected):"Not Answered"}</b></span>
+              <span>Correct answer: <b>${esc(a.correct||"-")}</b></span>
+            </div>
+          </div>
+          <div class="answer-status">${st==="correct"?"✓ Correct":st==="wrong"?"✕ Wrong":"— Left"}</div>
+        </div>`;
+      }).join("") : `<div class="results-empty"><div>📄</div><p>No question-level answer sheet has been saved for this result yet.</p></div>`}
+    </div>
+  </div>`;
+  modal.classList.remove("hidden");
+  openAnswerSheetHistory();
+}
+
+function filterResults(term){
+  const h=resultData(), list=$("resultsList"), empty=$("resultsEmpty");
+  if(!list||!empty)return;
+  const q=String(term||"").trim().toLowerCase();
+  const filtered=q?h.filter(r=>[
+    r.exam,r.paper,r.subject,r.stage,r.language,r.year,r.session,r.academicYear,r.examCycle
+  ].filter(Boolean).join(" ").toLowerCase().includes(q)):h;
+  empty.classList.toggle("hidden",filtered.length>0);
+  list.innerHTML=filtered.map(r=>{
+    const originalIndex=h.indexOf(r);
+    return `<div class="result-item">
+      <div class="result-top"><div><div class="result-name">${esc(r.exam||"Mock Test")}</div><div class="result-date">${esc(r.date||r.completedAt||"")}</div></div><div class="result-score">${Number(r.score)||0}%</div></div>
+      <div class="result-meta">
+        ${r.subject?`<span class="result-chip">📚 ${esc(r.subject)}</span>`:""}
+        ${r.language?`<span class="result-chip">🌐 ${esc(r.language)}</span>`:""}
+        ${(r.questions||r.questionCount)?`<span class="result-chip">📝 ${esc(r.questions||r.questionCount)} Questions</span>`:""}
+      </div>
+      <div class="result-bottom"><span class="result-status">✓ Completed</span><span class="result-actions"><button type="button" onclick="viewResult(${originalIndex})">View Details</button></span></div>
+    </div>`;
+  }).join("");
+}
+
+const PROFILE_KEY="mockmaster_profile_v1";
+const BOARD_OPTIONS={
+  "Andhra Pradesh":["Andhra Pradesh Board of Secondary Education","CBSE","ICSE","Other"],
+  "Arunachal Pradesh":["Arunachal Pradesh Board of School Education","CBSE","ICSE","Other"],
+  "Assam":["SEBA / Assam State School Education Board","AHSEC / Assam State School Education Board","CBSE","ICSE","Other"],
+  "Bihar":["Bihar School Examination Board (BSEB)","CBSE","ICSE","Other"],
+  "Chhattisgarh":["Chhattisgarh Board of Secondary Education (CGBSE)","CBSE","ICSE","Other"],
+  "Goa":["Goa Board of Secondary and Higher Secondary Education","CBSE","ICSE","Other"],
+  "Gujarat":["Gujarat Secondary and Higher Secondary Education Board (GSEB)","CBSE","ICSE","Other"],
+  "Haryana":["Board of School Education Haryana (BSEH)","CBSE","ICSE","Other"],
+  "Himachal Pradesh":["Himachal Pradesh Board of School Education (HPBOSE)","CBSE","ICSE","Other"],
+  "Jharkhand":["Jharkhand Academic Council (JAC)","CBSE","ICSE","Other"],
+  "Karnataka":["Karnataka School Examination and Assessment Board (KSEAB)","CBSE","ICSE","Other"],
+  "Kerala":["Kerala Board of Public Examinations","CBSE","ICSE","Other"],
+  "Madhya Pradesh":["Madhya Pradesh Board of Secondary Education (MPBSE)","CBSE","ICSE","Other"],
+  "Maharashtra":["Maharashtra State Board of Secondary and Higher Secondary Education (MSBSHSE)","CBSE","ICSE","Other"],
+  "Manipur":["Board of Secondary Education Manipur (BSEM)","Council of Higher Secondary Education Manipur (COHSEM)","CBSE","ICSE","Other"],
+  "Meghalaya":["Meghalaya Board of School Education (MBOSE)","CBSE","ICSE","Other"],
+  "Mizoram":["Mizoram Board of School Education (MBSE)","CBSE","ICSE","Other"],
+  "Nagaland":["Nagaland Board of School Education (NBSE)","CBSE","ICSE","Other"],
+  "Odisha":["Board of Secondary Education Odisha (BSE Odisha)","Council of Higher Secondary Education Odisha (CHSE Odisha)","CBSE","ICSE","Other"],
+  "Punjab":["Punjab School Education Board (PSEB)","CBSE","ICSE","Other"],
+  "Rajasthan":["Board of Secondary Education Rajasthan (RBSE)","CBSE","ICSE","Other"],
+  "Sikkim":["Sikkim Board of Open Schooling and Skill Education","CBSE","ICSE","Other"],
+  "Tamil Nadu":["Tamil Nadu State Board","CBSE","ICSE","Other"],
+  "Telangana":["Telangana Board of Secondary Education (BSE Telangana)","Telangana Board of Intermediate Education (TGBIE)","CBSE","ICSE","Other"],
+  "Tripura":["Tripura Board of Secondary Education (TBSE)","CBSE","ICSE","Other"],
+  "Uttar Pradesh":["Board of High School and Intermediate Education Uttar Pradesh (UPMSP)","CBSE","ICSE","Other"],
+  "Uttarakhand":["Uttarakhand Board of School Education (UBSE)","CBSE","ICSE","Other"],
+  "West Bengal":["West Bengal Board of Secondary Education (WBBSE)","West Bengal Council of Higher Secondary Education (WBCHSE)","CBSE","ICSE","Other"],
+  "Andaman & Nicobar Islands":["CBSE","ICSE","Other"],"Chandigarh":["CBSE","ICSE","Other"],
+  "Dadra & Nagar Haveli and Daman & Diu":["CBSE","ICSE","Other"],"Delhi":["CBSE","CISCE / ICSE","Delhi Board / Other"],
+  "Jammu & Kashmir":["Jammu and Kashmir Board of School Education (JKBOSE)","CBSE","ICSE","Other"],
+  "Ladakh":["CBSE","JKBOSE","ICSE","Other"],"Lakshadweep":["CBSE","ICSE","Other"],"Puducherry":["Puducherry Board / Tamil Nadu State Board","CBSE","ICSE","Other"]
+};
+function boardOptionsForState(state){return BOARD_OPTIONS[state]||["CBSE","ICSE","Other"];}
+function profileData(){
+  try{return JSON.parse(localStorage.getItem(PROFILE_KEY)||"{}")}catch(e){return {}}
+}
+
+let authMode="signin";
+function openAuth(mode){
+  authMode=mode;
+  const modal=$("authModal"); if(!modal)return;
+  modal.classList.remove("hidden");
+  $("authTitle").textContent=mode==="signin"?"Sign In":"Create Account";
+  $("authSubtitle").textContent=mode==="signin"?"Welcome back to MockMaster":"Create your MockMaster account";
+  $("authSubmit").textContent=mode==="signin"?"Sign In":"Sign Up";
+  $("googleAuthText").textContent=mode==="signin"?"Sign in with Google":"Sign up with Google";
+  $("authConfirmWrap").classList.toggle("hidden",mode!=="signup");
+  $("authSwitchText").innerHTML=mode==="signin"
+    ? `Don't have an account? <button onclick="switchAuth('signup')">Sign Up</button>`
+    : `Already have an account? <button onclick="switchAuth('signin')">Sign In</button>`;
+}
+function switchAuth(mode){openAuth(mode)}
+function closeAuth(){$("authModal")?.classList.add("hidden")}
+function submitAuth(){
+  const email=$("authEmail")?.value.trim(), password=$("authPassword")?.value;
+  if(!email||!password){alert("Please enter your email and password.");return}
+  if(authMode==="signup" && password!==$("authConfirm")?.value){alert("Passwords do not match.");return}
+  const p=profileData();
+  p.name=p.name||email.split("@")[0]||"Student";
+  p.email=email;
+  p.demoSignedIn=true;
+  localStorage.setItem(PROFILE_KEY,JSON.stringify(p));
+  closeAuth(); loadProfile(); alert(authMode==="signin"?"Signed in successfully.":"Account created successfully.");
+}
+function googleAuth(){
+  const p=profileData();
+  p.name=p.name||"Student";
+  p.email=p.email||"student@gmail.com";
+  p.demoSignedIn=true;
+  p.googleSignIn=true;
+  localStorage.setItem(PROFILE_KEY,JSON.stringify(p));
+  closeAuth(); loadProfile();
+  alert("Google sign-in will be connected to Firebase Authentication.");
+}
+function signOutDemo(){
+  if(typeof updateHeaderSignOut==='function')updateHeaderSignOut();
+  const p=profileData(); p.demoSignedIn=false; localStorage.setItem(PROFILE_KEY,JSON.stringify(p)); loadProfile();
+}
+
+function loadProfile(){
+  if(typeof updateHeaderSignOut==='function')updateHeaderSignOut();
+  const p=profileData();
+  const signed=!!p.demoSignedIn;
+  // Keep profile configuration visible even before sign-in.
+  if($("signedOutProfile"))$("signedOutProfile").classList.toggle("hidden",true);
+  if($("signedInProfile"))$("signedInProfile").classList.toggle("hidden",false);
+  if($("profileAuthPrompt"))$("profileAuthPrompt").classList.toggle("hidden",signed);
+  if($("profileSignOutBtn"))$("profileSignOutBtn").classList.toggle("hidden",!signed);
+  const name=p.name||"Student", email=p.email||"student@mockmaster.app";
+  const cls=p.classLevel||"Not set", state=p.state||"Not set", board=p.board||"Not set", school=p.school||"Not set";
+  if($("profileDisplayName"))$("profileDisplayName").textContent=name;
+  if($("profileDisplayEmail"))$("profileDisplayEmail").textContent=email;
+  if($("infoEmail"))$("infoEmail").textContent=email;
+  if($("inlineProfileName"))$("inlineProfileName").value=name==="Student"?"":name;
+  if($("inlineProfileClass"))$("inlineProfileClass").value=cls==="Not set"?"":cls;
+  populateInlineProfileStateOptions(state==="Not set"?"":state);
+  populateInlineProfileBoardOptions(state==="Not set"?"":state,board==="Not set"?"":board);
+  if($("inlineProfileSchool"))$("inlineProfileSchool").value=school==="Not set"?"":school;
+  if($("profileLanguage"))$("profileLanguage").value=p.language||"English";
+  if($("profileNotifications"))$("profileNotifications").checked=!!p.notifications;
+  const h=resultData();
+  if($("statTests"))$("statTests").textContent=h.length;
+  if($("statScore"))$("statScore").textContent=h.length?Math.round(h.reduce((a,x)=>a+(Number(x.score)||0),0)/h.length)+"%":"0%";
+}
+function populateInlineProfileStateOptions(selectedState){
+  const el=$("inlineProfileState"); if(!el)return;
+  el.innerHTML="<option value=\"\">Select State / UT</option>";
+  STATES.forEach(st=>{const o=document.createElement("option");o.value=st;o.textContent=st;el.appendChild(o)});
+  if(selectedState)el.value=selectedState;
+}
+function populateInlineProfileBoardOptions(state,selectedBoard){
+  const el=$("inlineProfileBoard"); if(!el)return;
+  el.innerHTML="<option value=\"\">Select Board</option>";
+  if(!state)return;
+  boardOptionsForState(state).forEach(b=>{const o=document.createElement("option");o.value=b;o.textContent=b;el.appendChild(o)});
+  if(selectedBoard)el.value=selectedBoard;
+}
+function saveInlineProfileField(field){
+  const p=profileData();
+  if(field==="name"){
+    const v=$("inlineProfileName")?.value.trim()||"";
+    if(!v){alert("Full Name is required."); loadProfile(); return;}
+    p.name=v;
+  }else if(field==="classLevel"){
+    const v=$("inlineProfileClass")?.value||"";
+    if(!v){alert("Class / Level is required."); return;}
+    p.classLevel=v;
+  }else if(field==="state"){
+    const v=$("inlineProfileState")?.value||"";
+    if(!v){alert("State / UT is required."); return;}
+    p.state=v;
+    p.board="";
+    populateInlineProfileBoardOptions(v,"");
+  }else if(field==="board"){
+    const v=$("inlineProfileBoard")?.value||"";
+    if(!v){alert("Board is required."); return;}
+    p.board=v;
+  }else if(field==="school"){
+    p.school=$("inlineProfileSchool")?.value.trim()||"";
+  }
+  localStorage.setItem(PROFILE_KEY,JSON.stringify(p));
+  loadProfile();
+}
+
+function populateProfileStateOptions(selectedState){
+  const el=$("editProfileState"); if(!el)return;
+  el.innerHTML="<option value=\"\">Select State / UT</option>";
+  STATES.forEach(st=>{const o=document.createElement("option");o.value=st;o.textContent=st;el.appendChild(o)});
+  if(selectedState)el.value=selectedState;
+}
+function updateProfileBoardOptions(selectedBoard){
+  const state=$("editProfileState")?.value||"";
+  const el=$("editProfileBoard"); if(!el)return;
+  el.innerHTML="<option value=\"\">Select Board</option>";
+  if(!state)return;
+  boardOptionsForState(state).forEach(b=>{const o=document.createElement("option");o.value=b;o.textContent=b;el.appendChild(o)});
+  if(selectedBoard)el.value=selectedBoard;
+}
+let profileEditorHistoryOpen=false;
+let profileEditorPreviousHash="#profile";
+function openProfileEditor(){
+  const p=profileData();
+  populateProfileStateOptions(p.state||"");
+  $("editProfileName").value=p.name&&p.name!=="Student"?p.name:"";
+  $("editProfileClass").value=p.classLevel&&p.classLevel!=="Not set"?p.classLevel:"";
+  updateProfileBoardOptions(p.board||"");
+  $("editProfileSchool").value=p.school&&p.school!=="Not set"?p.school:"";
+  $("profileEditModal")?.classList.remove("hidden");
+  if(!profileEditorHistoryOpen){
+    profileEditorHistoryOpen=true;
+    profileEditorPreviousHash=location.hash||"#profile";
+    // A real hash history entry makes Android back-swipe return to Profile.
+    try{history.pushState({mockmasterProfileEditor:true},"","#profile-edit");}catch(e){
+      try{location.hash="profile-edit";}catch(_e){}
+    }
+  }
+}
+function closeProfileEditor(fromPopState=false){
+  const modal=$("profileEditModal");
+  if(modal)modal.classList.add("hidden");
+  if(profileEditorHistoryOpen){
+    profileEditorHistoryOpen=false;
+    if(!fromPopState){
+      try{
+        if(location.hash==="#profile-edit") history.back();
+        else if(profileEditorPreviousHash) location.hash=profileEditorPreviousHash.replace(/^#/,"");
+      }catch(e){}
+    }
+  }
+}
+function saveEditedProfile(){
+  const p=profileData();
+  const name=$("editProfileName")?.value.trim()||"";
+  const cls=$("editProfileClass")?.value||"";
+  const state=$("editProfileState")?.value||"";
+  const board=$("editProfileBoard")?.value||"";
+  const school=$("editProfileSchool")?.value.trim()||"Not set";
+  if(!name){alert("Full Name is required.");return;}
+  if(!cls){alert("Class / Level is required.");return;}
+  if(!state){alert("State / UT is required.");return;}
+  if(!board){alert("Board is required.");return;}
+  localStorage.setItem(PROFILE_KEY,JSON.stringify({...p,name,classLevel:cls,state,board,school}));
+  closeProfileEditor();
+  loadProfile();
+}
+function editProfile(){openProfileEditor()}
+
+function saveProfilePreference(){
+  const p=profileData();
+  p.language=$("profileLanguage")?.value||"English";
+  p.notifications=!!$("profileNotifications")?.checked;
+  localStorage.setItem(PROFILE_KEY,JSON.stringify(p));
+}
+loadProfile();
+
+
+/* V37: Android back-swipe / browser back returns through MockMaster screens */
+window.addEventListener('hashchange', function(){
+  if(location.hash==="#profile-edit"){
+    if(!profileEditorHistoryOpen) openProfileEditor();
+    else $("profileEditModal")?.classList.remove("hidden");
+    return;
+  }
+  if(profileEditorHistoryOpen){
+    const modal=$("profileEditModal");
+    if(modal)modal.classList.add("hidden");
+    profileEditorHistoryOpen=false;
+  }
+  const id=(location.hash||'#home').slice(1) || 'home';
+  if($(id)) show(id,true);
+});
+
+(function initMockMasterNavigation(){
+  const id=(location.hash||'#home').slice(1) || 'home';
+  if(!location.hash){
+    try{ history.replaceState(null,'','#home'); }catch(e){}
+  }
+  if($(id)) show(id,true);
+})();
+
+if(typeof updateHeaderSignOut==='function')updateHeaderSignOut();
+
+/* V39 Community Papers */
+const COMMUNITY_KEY="mockmaster_community_papers_v1";
+function communityLoad(){try{return JSON.parse(localStorage.getItem(COMMUNITY_KEY)||"[]")}catch(e){return[]}}
+function communitySave(a){localStorage.setItem(COMMUNITY_KEY,JSON.stringify(a))}
+function communityExamKey(){
+ const c=window.currentExamConfig||window.selectedExamConfig;
+ if(c&&c.id)return c.id;
+ const h=document.querySelector("#setup h2");
+ return (h?h.textContent:"General Exam").replace(/[^a-z0-9]+/gi,"_").toLowerCase();
+}
+function communityExamName(){
+ const c=window.currentExamConfig||window.selectedExamConfig;
+ if(c&&(c.name||c.title))return c.name||c.title;
+ const h=document.querySelector("#setup h2"); return h?h.textContent.replace(/^[^A-Za-z]+/,"").trim():"Exam";
+}
+function escCommunity(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]))}
+function saveGeneratedCommunityPaper(questions,details){
+ const a=communityLoad();
+ const name=communityExamName();
+ const p={
+   id:"cm_"+Date.now()+"_"+Math.random().toString(36).slice(2,7),
+   examKey:communityExamKey(),
+   examName:name,
+   title:name+" • Community Mock #"+(a.filter(x=>x.examKey===communityExamKey()).length+1),
+   creator:(typeof profileData==="function"&&profileData().name)||"Guest",
+   questionCount:questions.length,
+   questions:questions.map(q=>Array.isArray(q)?q.slice():q),
+   details:details||"",
+   createdAt:new Date().toISOString(),
+   completedAttempts:[]
+ };
+ a.unshift(p);
+ communitySave(a);
+}
+function communityRender(){
+ const el=$("communityPaperList"); if(!el)return;
+ const papers=communityLoad().filter(p=>p.examKey===communityExamKey());
+ const total=papers.reduce((n,p)=>n+(p.completedAttempts||[]).length,0);
+ if($("communityPaperCount"))$("communityPaperCount").textContent= papers.length+" papers • "+total+" completed";
+ if(!papers.length){el.innerHTML='<div class="community-empty">No community papers yet. Generate a mock and it will be available here for others.</div>';return}
+ el.innerHTML=papers.map(p=>`<div class="community-paper"><div class="community-paper-info"><div class="community-paper-title">${escCommunity(p.title)}</div><div class="community-paper-meta">By ${escCommunity(p.creator||"User")} • ${p.questionCount||0} questions • ${(p.completedAttempts||[]).length} completed</div></div><div class="community-paper-actions"><button class="community-btn attempt" onclick="attemptCommunityPaper('${p.id}')">Attempt</button><button class="community-btn rank" onclick="showCommunityRank('${p.id}')">Rank</button></div></div>`).join("");
+}
+function publishCurrentMockToCommunity(){
+ const a=communityLoad(), p={id:"cm_"+Date.now(),examKey:communityExamKey(),examName:communityExamName(),title:communityExamName()+" • Community Mock #"+(a.length+1),creator:"You",questionCount:Number(($("questionCount")||$("qCount")||{}).value||20),createdAt:new Date().toISOString(),completedAttempts:[]};
+ a.unshift(p);communitySave(a);communityRender();alert("Your mock is now available for other users to attempt.");
+}
+function attemptCommunityPaper(id){
+ const p=communityLoad().find(x=>x.id===id);
+ if(!p||!Array.isArray(p.questions)||!p.questions.length){
+   alert("This community paper has no questions saved yet.");
+   return;
+ }
+ window.selectedCommunityPaperId=id;
+ selectedExam=p.examName||selectedExam;
+ test=p.questions.map(q=>Array.isArray(q)?q:[q.question,...(q.options||[])]);
+ answers=[];idx=0;seconds=10*60;
+ clearInterval(timerId);
+ timerId=setInterval(()=>{seconds--;renderTimer();if(seconds<=0)finish()},1000);
+ show("test");renderQ();
+}
+function recordCommunityCompletion(id,score,correct,wrong,left){
+ const a=communityLoad(),p=a.find(x=>x.id===id);if(!p)return;
+ const u=typeof profileData==="function"?profileData():{};
+ p.completedAttempts=p.completedAttempts||[];
+ p.completedAttempts.push({user:u.name||"User",score:Number(score)||0,correct:Number(correct)||0,wrong:Number(wrong)||0,left:Number(left)||0,completedAt:new Date().toISOString()});
+ communitySave(a);
+}
+function showCommunityRank(id){
+ const p=communityLoad().find(x=>x.id===id);if(!p)return;
+ const rows=[...(p.completedAttempts||[])].sort((a,b)=>(b.score||0)-(a.score||0)),me=(typeof profileData==="function"?profileData():{}).name||"User";
+ const mine=rows.findIndex(x=>x.user===me);
+ const b=$("communityLeaderboard");if(!b)return;
+ b.innerHTML=`<h4>🏅 ${escCommunity(p.title)} • Completed Users</h4>`+(rows.length?rows.slice(0,10).map((x,i)=>`<div class="community-row"><span class="ranknum">#${i+1}</span><span>${escCommunity(x.user)}${x.user===me?'<span class="stamina-badge">YOU</span>':''}</span><span class="score">${Number(x.score||0).toFixed(1)}%</span></div>`).join(""):'<div class="community-empty">No completed attempts yet.</div>')+(mine>=0?`<div class="community-meta">Your rank: #${mine+1} of ${rows.length} completed users</div>`:"");
+ b.classList.remove("hidden");
+}
+
+/* V44: attempted exam selector, five visible attempts, exam-cycle reset */
+const ATTEMPT_HISTORY_KEY="mockmaster_attempt_history_v1";
+
+function attemptHistoryLoad(){
+  try{return JSON.parse(localStorage.getItem("mockmaster_attempt_history_v1")||"[]")}catch(e){return[]}
+}
+function attemptHistorySave(a){localStorage.setItem("mockmaster_attempt_history_v1",JSON.stringify(a))}
+function examScheduleCycle(r){
+  const explicit=r.examCycle||r.session||r.academicYear||r.year;
+  if(explicit)return String(explicit);
+  return "";
+}
+function attemptExamKey(r){
+  return [r.exam||"",r.paper||"",r.subject||"",r.stage||"",r.language||"",examScheduleCycle(r)].join("||");
+}
+function attemptExamLabel(r){
+  return [r.exam,r.paper,r.subject].filter(Boolean).join(" • ")||"Mock Exam";
+}
+function attemptCycleLabel(r){return examScheduleCycle(r)||"Official exam cycle";}
+function recordCompletedAttempt(r){
+  const a=attemptHistoryLoad();
+  const item=Object.assign({},r,{
+    id:"att_"+Date.now()+"_"+Math.random().toString(36).slice(2,7),
+    examCycle:r.examCycle||r.session||r.academicYear||r.year||"",
+    completedAt:r.completedAt||r.date||new Date().toISOString(),
+    completed:true
+  });
+  a.push(item);
+  attemptHistorySave(a);
+}
+function allCompletedAttemptRows(){
+  return resultData().filter(x=>x.completed!==false);
+}
+function renderAttemptSelector(){
+  const sel=$("attemptExamSelect"); if(!sel)return;
+  const rows=allCompletedAttemptRows(), groups={};
+  rows.forEach(r=>{
+    const k=attemptExamKey(r);
+    if(!groups[k])groups[k]={key:k,label:attemptExamLabel(r),cycle:attemptCycleLabel(r),count:0};
+    groups[k].count++;
+  });
+  const old=sel.value;
+  sel.innerHTML='<option value="">Select an attempted exam</option>'+
+    Object.values(groups).map(g=>`<option value="${escCommunity(g.key)}">${escCommunity(g.label)} • ${escCommunity(g.cycle)} (${g.count})</option>`).join("");
+  if(groups[old])sel.value=old;
+  if(sel.value)renderAttemptHistory(sel.value);
+  else if($("attemptHistory"))$("attemptHistory").innerHTML=
+    '<div class="attempt-empty">'+(rows.length?'Select an attempted exam to view your attempts.':'Complete a mock test to add it here.')+'</div>';
+}
+
+function renderAttemptHistory(key){
+  const el=$("attemptHistory");if(!el)return;
+  if(!key){el.innerHTML='<div class="attempt-empty">Select an attempted exam to view your attempts.</div>';return}
+  const rows=allCompletedAttemptRows().filter(r=>attemptExamKey(r)===key);
+  rows.sort((a,b)=>(Number(b.score||0)-Number(a.score||0)) || (new Date(b.completedAt||b.date)-new Date(a.completedAt||a.date)));
+  if(!rows.length){el.innerHTML='<div class="attempt-empty">No completed attempts for this exam cycle.</div>';return}
+  el.innerHTML=`<div class="attempt-year-note">Exam cycle / session ${escCommunity(attemptCycleLabel(rows[0]))} • ${rows.length} completed attempt${rows.length===1?"":"s"} • Best 5 shown first</div>
+  <div class="attempt-scroll-list">${rows.map((r,i)=>`
+    <div class="attempt-item ${i<5?'best-attempt':''}" onclick="openAttempt('${r.id}')">
+      <span class="attempt-num">#${i+1}</span>
+      <div class="attempt-main">
+        <div class="attempt-title">${i<5?'⭐ ':''}${escCommunity(attemptExamLabel(r))}</div>
+        <div class="attempt-meta">${new Date(r.completedAt||r.date).toLocaleString()} • ${r.correct||0} correct • ${r.wrong||0} wrong • ${r.left||0} left</div>
+      </div>
+      <span class="attempt-score">${Number(r.score||0).toFixed(0)}%</span>
+    </div>`).join("")}</div>
+  ${rows.length>5?'<div class="attempt-more">↕ Scroll down to see more attempts</div>':''}`;
+}
+
+function openAttempt(id){
+  const r=attemptHistoryLoad().find(x=>x.id===id);
+  if(!r)return;
+  // Completed attempts cannot literally resume a finished test. Tapping one
+  // reopens its completed result/answer sheet when available.
+  window.selectedAttemptId=id;
+  if(typeof showResultForAttempt==="function"){showResultForAttempt(r);return}
+  if(typeof show==="function")show("results");
+  if(typeof renderAttemptDetails==="function")renderAttemptDetails(r);
+}
+function purgeOldAttemptHistory(){
+  // Intentionally no calendar-year purge.
+  // Old attempts remain stored, but only attempts belonging to the currently
+  // selected official exam cycle/session are shown in the selector.
+}
+
+</script>
+<script>
+/* V47: answer-sheet modal is centered and participates in browser back history */
+let answerSheetHistoryOpen=false;
+
+function openAnswerSheetHistory(){
+  if(answerSheetHistoryOpen)return;
+  answerSheetHistoryOpen=true;
+  try{
+    history.pushState({mockmasterAnswerSheet:true},"","#answer-sheet");
+  }catch(e){}
+}
+
+function closeAnswerSheet(fromPopState=false){
+  const modal=$("answerSheetModal");
+  if(modal)modal.classList.add("hidden");
+
+  if(answerSheetHistoryOpen){
+    answerSheetHistoryOpen=false;
+    if(!fromPopState){
+      try{
+        if(history.state && history.state.mockmasterAnswerSheet) history.back();
+      }catch(e){}
+    }
+  }
+}
+
+window.addEventListener("popstate",function(e){
+  if(profileEditorHistoryOpen){
+    closeProfileEditor(true);
+    return;
+  }
+  if(answerSheetHistoryOpen){
+    closeAnswerSheet(true);
+  }
+});
+</script>
+
+<script id="v54-doubt-clarification-js">
+/* V89: Doubt Clarification — Firebase AI Logic + Gemini + Google Search. */
+const GEMINI_MODEL = "gemini-3.8-flash";
+let doubtRequestId = 0;
+
+function clearDoubt(){
+  const q=$("doubtQuestion"),a=$("doubtAnswer"),st=$("doubtStatus"),src=$("doubtSources"),subject=$("doubtSubject");
+  if(subject)subject.value="";
+  if(q)q.value="";
+  if(a)a.textContent="Ask your doubt above. The answer will appear here.";
+  if(st)st.textContent="";
+  if(src)src.innerHTML="";
+}
+
+function escapeDoubtHtml(v){
+  return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
+
+function renderDoubtSources(sources){
+  const box=$("doubtSources"); if(!box)return;
+  box.innerHTML=(sources||[]).slice(0,6).map(s=>`<a class="doubt-source" href="${escapeDoubtHtml(s.url)}" target="_blank" rel="noopener noreferrer">${escapeDoubtHtml(s.title||s.url)}</a>`).join("");
+}
+
+function extractDoubtGroundingSources(response){
+  const chunks=response?.candidates?.[0]?.groundingMetadata?.groundingChunks||[];
+  return chunks.map(c=>({url:c?.web?.uri,title:c?.web?.title})).filter(x=>x.url);
+}
+
+async function askDoubt(){
+  const q=($("doubtQuestion")?.value||"").trim();
+  const subject=($("doubtSubject")?.value||"").trim();
+  const a=$("doubtAnswer"),st=$("doubtStatus"),diag=$("doubtDiagnostic"),btn=$("doubtAskBtn"),src=$("doubtSources");
+  if(!subject){if(st)st.textContent="Please select a subject.";return;}
+  if(!q){if(st)st.textContent="Please enter your question.";return;}
+
+  const requestId=++doubtRequestId;
+  if(btn){btn.disabled=true;btn.textContent="⏳ Checking AI service...";}
+  if(st)st.textContent=`Checking Firebase AI Logic for ${subject}…`;
+  if(src)src.innerHTML="";
+  if(a)a.textContent="";
+  if(diag){diag.classList.add("hidden");diag.textContent="";}
+
+  const showDiag=(label,value)=>{
+    if(!diag)return;
+    diag.classList.remove("hidden");
+    diag.textContent += `${label}: ${value}\n`;
+  };
+
+  try{
+    const model=window.MockMasterAI?.doubtModel;
+    if(!model)throw new Error("Firebase AI Logic is not initialized.");
+
+    // V96 diagnostic: inspect the actual Firebase app configuration and verify
+    // that App Check can obtain a token. The token value is never displayed.
+    const appCheckInstance=window.MockMasterAppCheckInstance;
+    const fd=window.MockMasterFirebaseDiagnostics||{};
+    showDiag("AI SDK", model ? "initialized" : "not initialized");
+    showDiag("Firebase project", fd.projectId || "unknown");
+    showDiag("Firebase app ID", fd.appId || "unknown");
+    showDiag("Auth domain", fd.authDomain || "unknown");
+    showDiag("Firebase API key", fd.apiKeyMasked || "missing");
+    showDiag("AI backend", fd.aiBackend || "unknown");
+    showDiag("Model", fd.model || "unknown");
+    showDiag("Page origin", fd.origin || window.location.origin);
+    showDiag("App Check", appCheckInstance ? "initialized" : "instance unavailable");
+    if(appCheckInstance){
+      try{
+        const token=await window.MockMasterGetAppCheckToken(false);
+        showDiag("App Check token", token ? `received (${token.length} characters)` : "EMPTY");
+      }catch(appCheckErr){
+        showDiag("App Check token error", String(appCheckErr?.message||appCheckErr));
+      }
+    }
+
+    const prompt=`You are the subject doubt assistant for MockMaster.
+Selected subject: ${subject}
+Student question: ${q}
+
+Answer the question accurately and clearly for a school student. Use Google Search when it can improve factual accuracy or when the information may be current. Prefer authoritative educational sources such as NCERT, CBSE, official government websites, universities, and other reputable academic sources. Give the direct answer first, then a concise explanation or steps. Stay focused on the selected subject. Do not invent facts. If reliable information cannot be verified, say so.`;
+
+    if(st)st.textContent="Sending request to Firebase AI Logic…";
+    const result=await model.generateContent(prompt);
+    if(requestId!==doubtRequestId)return;
+    const response=result?.response;
+    const answer=typeof response?.text==="function"?response.text().trim():"";
+    const sources=extractDoubtGroundingSources(response);
+    showDiag("AI request", "SUCCESS");
+    if(a)a.textContent=answer||"The AI returned no answer. Please try the question again.";
+    renderDoubtSources(sources);
+    if(st)st.textContent=sources.length?"Answer checked with Google Search. Tap a source to verify details.":"Answer generated. No Google Search sources were returned.";
+  }catch(err){
+    if(requestId!==doubtRequestId)return;
+    console.error("MockMaster Doubt AI error:",err);
+    const msg=String(err?.message||err||"Unknown error");
+    const code=String(err?.code||"");
+    showDiag("AI request", "FAILED");
+    showDiag("Error code", code||"not provided");
+    showDiag("Error message", msg);
+    if(a)a.textContent="The answer could not be generated.";
+    if(st)st.textContent="Firebase AI Logic request failed. See Technical diagnostic below.";
+  }finally{
+    if(requestId===doubtRequestId&&btn){btn.disabled=false;btn.textContent="🔎 Get Answer";}
+  }
+}
+
+(function initDoubtClarification(){
+  const q=$("doubtQuestion");
+  if(!q)return;
+  q.addEventListener("keydown",e=>{
+    if((e.ctrlKey||e.metaKey)&&e.key==="Enter"){e.preventDefault();askDoubt();}
+  });
+})();
+</script>
+
+<script>
+/* V77: Firebase notifications + live web fallback.
+   Firestore is the primary notification source. The web feed remains as a fallback
+   until official notifications are added to the Firebase collection. */
+const LIVE_NEWS_REFRESH_MS = 30 * 60 * 1000;
+const LIVE_NEWS_MAX_AGE_DAYS = 7;
+const LIVE_NEWS_QUERIES = [
+  'India admissions university college entrance exam notification',
+  'India exam notification rescheduled postponed revised exam date',
+  'India NTA UPSC SSC IBPS RRB exam admission notification',
+  'India CBSE ICSE state board university exam notification admission'
+];
+
+function liveNewsEscape(v){
+  return String(v||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+function liveNewsDaysOld(date){
+  if(!date)return 9999;
+  const t=Date.parse(date); if(Number.isNaN(t))return 9999;
+  return (Date.now()-t)/86400000;
+}
+function liveNewsIsRelevant(item){
+  const text=((item.title||item.text||item.description||'')+' '+(item.description||'')).toLowerCase();
+  const terms=['admission','admissions','exam','examination','entrance','reschedul','postpon','revised date','notification','application','registration','admit card','counselling','counseling'];
+  return terms.some(t=>text.includes(t));
+}
+function liveNewsMakeTicker(items){
+  const box=document.getElementById('homeExamNewsTicker'); if(!box)return;
+  if(!items.length)return;
+  const seen=new Set();
+  const clean=items.filter(n=>{
+    const key=(n.id||n.link||n.url||n.title||n.text||'').trim();
+    if(!key||seen.has(key))return false;
+    const pub=n.publishedAt||n.pubDate||n.date;
+    if(!pub)return false;
+    if(liveNewsDaysOld(pub)>LIVE_NEWS_MAX_AGE_DAYS)return false;
+    if(liveNewsDaysOld(pub)<-1)return false;
+    if(!liveNewsIsRelevant(n))return false;
+    seen.add(key); return true;
+  }).slice(0,24);
+  if(!clean.length)return;
+  const shuffled=[...clean].sort(()=>Math.random()-0.5);
+  const contrastSet=new Set(shuffled.slice(0,Math.max(1,Math.ceil(clean.length*0.28))).map(n=>(n.id||n.link||n.url||n.title||n.text||'').trim()));
+  const html=clean.concat(clean).map(n=>{
+    let cleanTitle=(n.text||n.title||'').replace(/\s+/g,' ').trim();
+    // Remove publisher suffixes commonly appended by Google News RSS.
+    const dash=cleanTitle.lastIndexOf(' - ');
+    if(dash>0){
+      const suffix=cleanTitle.slice(dash+3).trim();
+      if(suffix && suffix.length<=80 && !/[.!?]$/.test(suffix)) cleanTitle=cleanTitle.slice(0,dash).trim();
+    }
+    const title=liveNewsEscape(cleanTitle);
+    const href=liveNewsEscape(n.url||n.link||'#');
+    const contrastClass=contrastSet.has((n.id||n.link||n.url||n.title||n.text||'').trim())?' contrast-news':'';
+    return `<a class="exam-news-item${contrastClass}" href="${href}" target="_blank" rel="noopener noreferrer"><span class="bullet">•</span><span>${title}</span></a>`;
+  }).join('');
+  box.innerHTML=html;
+  box.dataset.initialized='1';
+  box.style.animation='none'; void box.offsetWidth; box.style.animation='mockmasterNewsScroll 45s linear infinite';
+}
+
+function renderFirestoreNotifications(items){
+  if(!Array.isArray(items)||!items.length)return;
+
+  const todayKey=new Date().toISOString().slice(0,10);
+
+  const active=items.filter(n=>{
+    // Remove expired notifications.
+    if(n.expires && todayKey>=n.expires)return false;
+
+    // Remove notifications with a publication date older than 7 days.
+    const pub=n.publishedAt||n.pubDate||n.date;
+    if(pub && liveNewsDaysOld(pub)>LIVE_NEWS_MAX_AGE_DAYS)return false;
+
+    return true;
+  });
+
+  if(active.length)liveNewsMakeTicker(active);
+}
+
+async function fetchLiveNewsQuery(queryText){
+  const rss='https://news.google.com/rss/search?q='+encodeURIComponent(queryText+' when:30d')+'&hl=en-IN&gl=IN&ceid=IN:en';
+  const api='https://api.rss2json.com/v1/api.json?rss_url='+encodeURIComponent(rss);
+  const res=await fetch(api,{cache:'no-store'});
+  if(!res.ok)throw new Error('feed '+res.status);
+  const data=await res.json();
+  return Array.isArray(data.items)?data.items:[];
+}
+async function refreshLiveIndiaEducationNews(){
+  try{
+    const batches=await Promise.allSettled(LIVE_NEWS_QUERIES.map(fetchLiveNewsQuery));
+    const items=batches.flatMap(r=>r.status==='fulfilled'?r.value:[]);
+    items.sort((a,b)=>(Date.parse(b.pubDate)||0)-(Date.parse(a.pubDate)||0));
+    liveNewsMakeTicker(items);
+    localStorage.setItem('mockmaster_live_news_last_sync',new Date().toISOString());
+  }catch(e){
+    console.warn('Live notification refresh failed:',e);
+  }
+}
+
+window.addEventListener('load',()=>{
+  // Firestore updates are realtime. If Firestore has no notifications yet, use the web feed.
+  let firestoreHasNotifications=false;
+  if(window.MockMasterFirebase && typeof window.MockMasterFirebase.listenNotifications==='function'){
+    try{
+      window.MockMasterFirebase.listenNotifications(items=>{
+        if(items.length){
+          firestoreHasNotifications=true;
+          renderFirestoreNotifications(items);
+        }
+      });
+    }catch(e){ console.warn('Firestore notification setup failed:',e); }
+  }
+  refreshLiveIndiaEducationNews();
+  setInterval(()=>{ if(!firestoreHasNotifications) refreshLiveIndiaEducationNews(); },LIVE_NEWS_REFRESH_MS);
+});
+</script>
+</body></html>
+
+<style>
+/* Home: Explore is available only from the bottom navigation. */
+#home .practice-grid button:only-child{grid-column:1 / -1}
+</style>
+
+<style id="v84-signout-location-fix">
+/* V84: Keep the single Sign Out button only in the header/Home area. */
+#profileSignOutBtn{display:none!important}
+</style>
