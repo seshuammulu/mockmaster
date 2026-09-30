@@ -1,0 +1,99 @@
+{
+  "exam": "CUET UG",
+  "year": 2026,
+  "subject": "Sociology",
+  "subject_code": "326",
+  "subject_specification": "Domain",
+  "source": "National Testing Agency (NTA), CUET(UG)-2026 Syllabus",
+  "source_url": "https://cuet.nta.nic.in/cuetug-2026-syllabus/",
+  "sections": [
+    {
+      "name": "Indian Society",
+      "topics": [
+        {
+          "name": "Unit I: Structure of Indian Society",
+          "details": [
+            "Demographic Structure",
+            "Rural-Urban Linkages and Divisions"
+          ]
+        },
+        {
+          "name": "Unit II: Social Institutions",
+          "details": [
+            "Family and Kinship",
+            "Caste System",
+            "Tribal Society",
+            "Market as Social Institution"
+          ]
+        },
+        {
+          "name": "Unit III: Social Inequality and Exclusion",
+          "details": [
+            "Caste Prejudice, SC/OBC",
+            "Marginalisation of tribal communities",
+            "Women’s equality",
+            "Religious minorities",
+            "Different abled"
+          ]
+        },
+        {
+          "name": "Unit IV: Challenges of Unity in Diversity",
+          "details": [
+            "Communalism",
+            "Regionalism",
+            "Casteism",
+            "Patriarchy",
+            "Communities/nations/nation states",
+            "Role of state/civil society"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Change and Development in India",
+      "topics": [
+        {
+          "name": "Unit I: Process of Social Change",
+          "details": [
+            "Structural change: colonialism, industrialisation, urbanisation",
+            "Cultural change: modernization, westernisation, Sanskritisation, secularisation",
+            "Social reform movements/laws"
+          ]
+        },
+        {
+          "name": "Unit II: Social Change and Polity",
+          "details": [
+            "Constitution",
+            "Parties/pressure groups/democratic politics",
+            "Panchayati Raj"
+          ]
+        },
+        {
+          "name": "Unit III: Social Change and Economy",
+          "details": [
+            "Land reforms/Green Revolution/agrarian society",
+            "Planned industrialisation to liberalisation",
+            "Class structure"
+          ]
+        },
+        {
+          "name": "Unit IV: New Arenas",
+          "details": [
+            "Media and social change",
+            "Globalisation and social change"
+          ]
+        },
+        {
+          "name": "Unit V: Social Movements",
+          "details": [
+            "Class-based",
+            "Caste-based",
+            "Women’s",
+            "Tribal",
+            "Environmental"
+          ]
+        }
+      ]
+    }
+  ]
+}
