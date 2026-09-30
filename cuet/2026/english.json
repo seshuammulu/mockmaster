@@ -1,0 +1,33 @@
+{
+  "exam": "CUET UG",
+  "year": 2026,
+  "subject": "English",
+  "subject_code": "101",
+  "subject_specification": "Language",
+  "source": "National Testing Agency (NTA), CUET(UG)-2026 Syllabus",
+  "source_url": "https://cuet.nta.nic.in/cuetug-2026-syllabus/",
+  "sections": [
+    {
+      "name": "Language Section",
+      "topics": [
+        {
+          "name": "Reading Comprehension",
+          "details": [
+            "Three types: Factual",
+            "Three types: Narrative",
+            "Three types: Literary"
+          ]
+        },
+        {
+          "name": "Verbal Ability",
+          "details": [
+            "Rearranging the parts",
+            "Match the following",
+            "Choosing the correct word",
+            "Synonyms and Antonyms"
+          ]
+        }
+      ]
+    }
+  ]
+}
