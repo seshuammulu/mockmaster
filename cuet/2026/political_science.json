@@ -1,0 +1,37 @@
+{
+  "exam": "CUET UG",
+  "year": 2026,
+  "subject": "Political Science",
+  "subject_code": "323",
+  "subject_specification": "Domain",
+  "source": "National Testing Agency (NTA), CUET(UG)-2026 Syllabus",
+  "source_url": "https://cuet.nta.nic.in/cuetug-2026-syllabus/",
+  "sections": [
+    {
+      "name": "Political in India Since Independence",
+      "topics": [
+        "Era of One-Party Dominance",
+        "Nation-Building and Its Problems",
+        "Politics of Planned Development",
+        "India’s External Relation",
+        "Challenge to and Restoration of Congress System",
+        "Crises of the Constitutional Order",
+        "Regional Aspiration and Conflicts",
+        "Democratic Upsurge and Coalition Politics",
+        "Recent Issues and Challenges"
+      ]
+    },
+    {
+      "name": "Contemporary World Politics",
+      "topics": [
+        "Disintegration of Second World/Collapse of Bipolarity",
+        "Alternative Centers of Economic and Political Power",
+        "South Asia in Post Cold War Era",
+        "International Organisations in a Unipolar World",
+        "Security in Contemporary World",
+        "Environment and Natural Resources in Global Politics",
+        "Globalisation and its critics"
+      ]
+    }
+  ]
+}
