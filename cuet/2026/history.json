@@ -1,0 +1,38 @@
+{
+  "exam": "CUET UG",
+  "year": 2026,
+  "subject": "History",
+  "subject_code": "314",
+  "subject_specification": "Domain",
+  "source": "National Testing Agency (NTA), CUET(UG)-2026 Syllabus",
+  "source_url": "https://cuet.nta.nic.in/cuetug-2026-syllabus/",
+  "sections": [
+    {
+      "name": "Part I",
+      "topics": [
+        "Harappan Civilisation and Archaeology",
+        "Political/Economic Systems in Early States: Inscriptional Evidences",
+        "Social Histories of Early Societies: Mahabharata",
+        "History of Buddhism and Jainism: Cultural Developments"
+      ]
+    },
+    {
+      "name": "Part II",
+      "topics": [
+        "Medieval Society through Travellers Accounts",
+        "Bhakti-Sufi Traditions",
+        "Vijayanagara Empire",
+        "Mughal Empire and Agrarian Society"
+      ]
+    },
+    {
+      "name": "Part III",
+      "topics": [
+        "Colonialism and Rural Society",
+        "Revolt of 1857",
+        "Mahatma Gandhi and National Movements",
+        "Making of Constitution"
+      ]
+    }
+  ]
+}
